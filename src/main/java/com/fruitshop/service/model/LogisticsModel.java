@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class LogisticsModel {
     private String id;
-    //目的地
-    private String address;
     //订单号
     private String orderId;
+    //地址号
+    private Integer addressId;
     //创建时间
     private Date createTime;
 
@@ -15,16 +15,16 @@ public class LogisticsModel {
         return id;
     }
 
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
+
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getOrderId() {
