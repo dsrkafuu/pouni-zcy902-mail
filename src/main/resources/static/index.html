@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>QUALITY HOME-首页</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/slide.js"></script>
+	<script type="text/javascript" src="js/ajax-config.js"></script>
+</head>
+<body>
+	<div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到QUALITY HOMEHOME!</div>
+			<div class="fr">
+				<div class="login_info fl">
+
+				</div>
+				<div class="login_btn fl">
+					<a href="login.html">登录</a>
+					<span>|</span>
+					<a href="register.html">注册</a>
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="user_center_info.html">用户中心</a>
+					<span>|</span>
+					<a href="cart.html">我的购物车</a>
+					<span>|</span>
+					<a href="user_center_order.html">我的订单</a>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="search_bar clearfix">
+		<a href="index.html" class="logo fl"><img src="images/logo.png" width="150px" height="150px"></a>
+		<div class="search_con fl">
+			<input type="text" class="input_text fl" name="" placeholder="搜索商品" id="search">
+			<input type="button" class="input_btn fr" name="" value="搜索">
+		</div>
+		<div class="guest_cart fr">
+			<a href="cart.html" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count"></div>
+		</div>
+	</div>
+
+	<div class="navbar_con">
+		<div class="navbar">
+			<h1 class="fl">全部商品分类</h1>
+			<ul class="navlist fl">
+				<li><a href="index.html">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="register-e.html">商家入驻</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="center_con clearfix">
+		<ul class="subnav fl">
+			<li><a href="#model01" class="bedroom">卧室</a></li>
+			<li><a href="#model02" class="diningroom">餐厅</a></li>
+			<li><a href="#model03" class="saloon">客厅</a></li>
+			<li><a href="#model04" class="study">书房</a></li>
+			<li><a href="#model05" class="wallpaper">墙纸</a></li>
+			<li><a href="#model06" class="style">家装风格</a></li>
+		</ul>
+		<div class="slide fl">
+			<ul class="slide_pics">
+				<li><img src="images/1.jpg" alt="幻灯片"></li>
+				<li><img src="images/2.jpg" alt="幻灯片"></li>
+				<li><img src="images/3.jpg" alt="幻灯片"></li>
+				<li><img src="images/4.jpg" alt="幻灯片"></li>
+			</ul>
+			<div class="prev"></div>
+			<div class="next"></div>
+			<ul class="points"></ul>
+		</div>
+		<div class="adv fl">
+			<a href="#"><img src="images/6.png"></a>
+			<a href="#"><img src="images/5.jpg"></a>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model01">卧室</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				<a >床垫</a>
+				<a >现代床</a>
+				<a >衣柜</a>
+			</div>
+			<a href="#" class="goods_more fr" id="get_more_1">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="images/t1.jpg"></div>
+			<ul class="goods_list fl">
+				<li>
+					<h4><a id="goods_title_f1_0">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f1_0" src="images/goods.jpg"></a>
+					<div id="goods_price_f1_0" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f1_1">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f1_1" src="images/goods.jpg"></a>
+					<div id="goods_price_f1_1" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f1_2" >欢迎入驻</a></h4>
+					<a ><img id="goods_img_f1_2" src="images/goods.jpg"></a>
+					<div id="goods_price_f1_2" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f1_3">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f1_3" src="images/goods.jpg"></a>
+					<div id="goods_price_f1_3" class="prize">¥ 9999.00</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model02">餐厅</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				<a href="#">简约餐桌</a>
+				<a href="#">餐具</a>				
+			</div>
+			<a href="#" class="goods_more fr" id="get_more_2">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="images/t2.jpg"></div>
+			<ul class="goods_list fl">
+				<li>
+					<h4><a id="goods_title_f2_0">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f2_0" src="images/goods.jpg"></a>
+					<div id="goods_price_f2_0" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f2_1">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f2_1" src="images/goods.jpg"></a>
+					<div id="goods_price_f2_1" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f2_2" >欢迎入驻</a></h4>
+					<a ><img id="goods_img_f2_2" src="images/goods.jpg"></a>
+					<div id="goods_price_f2_2" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f2_3">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f2_3" src="images/goods.jpg"></a>
+					<div id="goods_price_f2_3" class="prize">¥ 9999.00</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model03">客厅</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				<a href="#">电视柜 </a>
+				<a href="#">茶几</a>
+				<a href="#">沙发</a>
+			</div>
+			<a href="#" class="goods_more fr" id="get_more_3">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="images/t3.jpg"></div>
+			<ul class="goods_list fl">
+				<li>
+					<h4><a id="goods_title_f3_0">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f3_0" src="images/goods.jpg"></a>
+					<div id="goods_price_f3_0" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f3_1">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f3_1" src="images/goods.jpg"></a>
+					<div id="goods_price_f3_1" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f3_2" >欢迎入驻</a></h4>
+					<a ><img id="goods_img_f3_2" src="images/goods.jpg"></a>
+					<div id="goods_price_f3_2" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f3_3">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f3_3" src="images/goods.jpg"></a>
+					<div id="goods_price_f3_3" class="prize">¥ 9999.00</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model04">书房</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				<a href="#">书桌</a>
+				<a href="#">书柜</a>
+				<a href="#">电脑桌</a>
+			</div>
+			<a href="#" class="goods_more fr" id="get_more_4">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="images/t4.jpg"></div>
+			<ul class="goods_list fl">
+				<li>
+					<h4><a id="goods_title_f4_0">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f4_0" src="images/goods.jpg"></a>
+					<div id="goods_price_f4_0" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f4_1">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f4_1" src="images/goods.jpg"></a>
+					<div id="goods_price_f4_1" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f4_2" >欢迎入驻</a></h4>
+					<a ><img id="goods_img_f4_2" src="images/goods.jpg"></a>
+					<div id="goods_price_f4_2" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f4_3">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f4_3" src="images/goods.jpg"></a>
+					<div id="goods_price_f4_3" class="prize">¥ 9999.00</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model05">墙纸</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				<a href="#">简易、易贴</a>
+				<a href="#">质感</a>
+				<a href="#">防水</a>
+			</div>
+			<a href="#" class="goods_more fr" id="get_more_5">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="images/t5.jpg"></div>
+			<ul class="goods_list fl">
+				<li>
+					<h4><a id="goods_title_f5_0">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f5_0" src="images/goods.jpg"></a>
+					<div id="goods_price_f5_0" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f5_1">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f5_1" src="images/goods.jpg"></a>
+					<div id="goods_price_f5_1" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f5_2" >欢迎入驻</a></h4>
+					<a ><img id="goods_img_f5_2" src="images/goods.jpg"></a>
+					<div id="goods_price_f5_2" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f5_3">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f5_3" src="images/goods.jpg"></a>
+					<div id="goods_price_f5_3" class="prize">¥ 9999.00</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="list_model">
+		<div class="list_title clearfix">
+			<h3 class="fl" id="model06">家装风格</h3>
+			<div class="subtitle fl">
+				<span>|</span>
+				<a href="#">简约北欧</a>
+				<a href="#">中式复古</a>
+				<a href="#">地中海风格</a>
+			</div>
+			<a href="#" class="goods_more fr" id="get_more_6">查看更多 ></a>
+		</div>
+
+		<div class="goods_con clearfix">
+			<div class="goods_banner fl"><img src="images/t6.jpg"></div>
+			<ul class="goods_list fl">
+				<li>
+					<h4><a id="goods_title_f6_0">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f6_0" src="images/goods.jpg"></a>
+					<div id="goods_price_f6_0" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f6_1">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f6_1" src="images/goods.jpg"></a>
+					<div id="goods_price_f6_1" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f6_2" >欢迎入驻</a></h4>
+					<a ><img id="goods_img_f6_2" src="images/goods.jpg"></a>
+					<div id="goods_price_f6_2" class="prize">¥ 9999.00</div>
+				</li>
+				<li>
+					<h4><a id="goods_title_f6_3">欢迎入驻</a></h4>
+					<a ><img id="goods_img_f6_3" src="images/goods.jpg"></a>
+					<div id="goods_price_f6_3" class="prize">¥ 9999.00</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="foot_link">
+			<a href="#">关于我们</a>
+			<span>|</span>
+			<a href="#">联系我们</a>
+			<span>|</span>
+			<a href="#">招聘人才</a>
+			<span>|</span>
+			<a href="#">友情链接</a>		
+		</div>
+		<p>CopyRight © 2016 北京QUALITY HOMEHOME信息技术有限公司 All Rights Reserved</p>
+		<p>电话：010-****888    京ICP备*******8号</p>
+	</div>
+	<script type="text/javascript" src="js/search-btn.js"></script>
+	<script type="text/javascript" src="js/my-cart.js"></script>
+	<script type="text/javascript" src="js/head.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
