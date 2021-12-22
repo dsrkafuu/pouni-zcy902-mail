@@ -65,6 +65,7 @@ module.exports = {
     }),
     ...htmlPlugins,
   ],
+  // 代理 spring 服务器
   devServer: {
     port: 3000,
     hot: false,
