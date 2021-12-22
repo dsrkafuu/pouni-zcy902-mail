@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 var g_itemVO = [];
 
 var g_itemList = [];
@@ -21,10 +23,8 @@ function addAnimation($add_x, $add_y, $to_x, $to_y) {
         top: $to_x + 7,
       },
       'fast',
-      function () {
-        $('.add_jump').fadeOut('fast', function () {
-          getCartNum();
-        });
+      () => {
+        $('.add_jump').fadeOut('fast');
       }
     );
 }
@@ -63,23 +63,23 @@ function reloadStoreItems() {
         .find('span.unit')
         .html('/一件');
       $('#item_' + i).attr('data-id', itemVO.id);
-      $('#item_' + i).on('click', function () {
-        window.location.href = 'detail.html?id=' + $(this).data('id');
+      $('#item_' + i).on('click', () => {
+        window.location.href = '/detail.html?id=' + $(this).data('id');
       });
     }
   }
 }
 
-jQuery(document).ready(function () {
+$(() => {
   //获取商品详情
   $.ajax({
     type: 'GET',
-    url: host + '/item/get',
+    url: '/item/get',
     data: {
       id: GetQueryString('id'),
     },
     xhrFields: { withCredentials: true },
-    success: function (data) {
+    success(data) {
       if (data.status == 'success') {
         g_itemVO = data.data;
         var amount = parseInt($('#amount').val());
@@ -88,12 +88,12 @@ jQuery(document).ready(function () {
         alert('获取信息失败，原因是' + data.data.errMsg);
       }
     },
-    error: function (data) {
+    error(data) {
       alert('获取信息失败，原因是' + data.responseText);
     },
   });
 
-  $('#add_amount').on('click', function () {
+  $('#add_amount').on('click', () => {
     var amount = parseInt($('#amount').val());
     var price = parseFloat($('#price').text());
     amount++;
@@ -102,7 +102,7 @@ jQuery(document).ready(function () {
     $('#total_price').text(totalPrice.toFixed(2) + '元');
   });
 
-  $('#minus_amount').on('click', function () {
+  $('#minus_amount').on('click', () => {
     var amount = parseInt($('#amount').val());
     var price = parseFloat($('#price').text());
     if (amount == 1) {
@@ -116,13 +116,13 @@ jQuery(document).ready(function () {
     }
   });
 
-  $('#buy_now').on('click', function () {
+  $('#buy_now').on('click', () => {
     var amount = parseInt($('#amount').val());
     window.location.href =
-      'item-order.html?amount=' + amount + '&itemId=' + g_itemVO.id;
+      '/item-order.html?amount=' + amount + '&itemId=' + g_itemVO.id;
   });
 
-  $('#add_cart').on('click', function () {
+  $('#add_cart').on('click', () => {
     var $add_x = $('#add_cart').offset().top;
     var $add_y = $('#add_cart').offset().left;
 
@@ -133,29 +133,29 @@ jQuery(document).ready(function () {
     $.ajax({
       type: 'POST',
       contentType: 'application/x-www-form-urlencoded',
-      url: host + '/cart/add',
+      url: '/cart/add',
       data: {
         itemId: g_itemVO.id,
         amount: amount,
       },
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           addAnimation($add_x, $add_y, $to_x, $to_y);
         } else {
           alert('添加失败，原因是' + data.data.errMsg);
           if (data.data.errCode == 20003) {
-            window.location.href = 'login.html';
+            window.location.href = '/login.html';
           }
         }
       },
-      error: function (data) {
+      error(data) {
         alert('添加失败，原因是' + data.responseText);
       },
     });
   });
 
-  $('#get_items').on('click', function () {
+  $('#get_items').on('click', () => {
     if ($('.detail_tab').children('li.active').html() == '商品介绍') {
       $('#get_items').addClass('active');
       $('#get_detail').removeClass('active');
@@ -165,13 +165,13 @@ jQuery(document).ready(function () {
       $.ajax({
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
-        url: host + '/item/listbystorename',
+        url: '/item/listbystorename',
         data: {
           storeName: store_name,
           page: 1,
         },
         xhrFields: { withCredentials: true },
-        success: function (data) {
+        success(data) {
           if (data.status == 'success') {
             g_itemList = data.data;
             reloadStoreItems();
@@ -179,13 +179,13 @@ jQuery(document).ready(function () {
             alert('获取本店精选失败，原因是' + data.data.errMsg);
           }
         },
-        error: function (data) {
+        error(data) {
           alert('获取本店精选失败，原因是' + data.responseText);
         },
       });
     }
   });
-  $('#get_detail').on('click', function () {
+  $('#get_detail').on('click', () => {
     if ($('.detail_tab').children('li.active').html() == '本店精选') {
       $('#get_detail').addClass('active');
       $('#get_items').removeClass('active');

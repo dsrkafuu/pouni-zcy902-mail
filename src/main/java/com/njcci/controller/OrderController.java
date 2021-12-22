@@ -132,14 +132,14 @@ public class OrderController extends BaseController {
     @RequestMapping(
             value = {"/complete"},
             method = {RequestMethod.POST},
-            consumes = {"application/x-www-form-urlencoded"}
+        consumes = {"application/x-www-form-urlencoded"}
     )
-    public CommonReturnType completeOrder(@RequestParam(name = "id") String id, @RequestParam(name = "paymentMethod") Integer paymentMethod, @RequestParam(name = "addressId") Integer addressId) {
-        Boolean isLogin = (Boolean)this.httpServletRequest.getSession().getAttribute("IS_USER_LOGIN");
-        if (isLogin != null && isLogin) {
-            UserModel userModel = (UserModel)this.httpServletRequest.getSession().getAttribute("LOGIN_USER");
-            LogisticsModel logisticsModel = this.orderService.completeOrder(id, userModel.getId(), paymentMethod, addressId);
-            return CommonReturnType.create(logisticsModel);
+        public CommonReturnType completeOrder(@RequestParam(name = "id") String id, @RequestParam(name = "paymentMethod") Integer paymentMethod, @RequestParam(name = "addressId") Integer addressId) {
+            Boolean isLogin = (Boolean)this.httpServletRequest.getSession().getAttribute("IS_USER_LOGIN");
+            if (isLogin != null && isLogin) {
+                UserModel userModel = (UserModel)this.httpServletRequest.getSession().getAttribute("LOGIN_USER");
+                LogisticsModel logisticsModel = this.orderService.completeOrder(id, userModel.getId(), paymentMethod, addressId);
+                return CommonReturnType.create(logisticsModel);
         } else {
             throw new BusinessException(EmBusinessError.USER_NOT_LOGIN);
         }

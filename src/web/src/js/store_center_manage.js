@@ -1,18 +1,20 @@
-$(function () {
+import $ from 'jquery';
+
+$(() => {
   var now_page = 1;
   var max_page = 1;
   var logistics_list = [];
   getMaxPage();
   getLogisticsList();
 
-  $('#pg_dn').on('click', function () {
+  $('#pg_dn').on('click', () => {
     if (now_page < max_page) {
       now_page++;
       getLogisticsList();
       reloadActivePage();
     }
   });
-  $('#pg_up').on('click', function () {
+  $('#pg_up').on('click', () => {
     if (now_page > 1) {
       now_page--;
       getLogisticsList();
@@ -23,9 +25,9 @@ $(function () {
   function getMaxPage() {
     $.ajax({
       type: 'GET',
-      url: host + '/store/getcount',
+      url: '/store/getcount',
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           var num = data.data;
           if (num != 0) {
@@ -36,7 +38,7 @@ $(function () {
           alert('获取订单数量失败，原因是' + data.data.errMsg);
         }
       },
-      error: function (data) {
+      error(data) {
         alert('获取订单数量失败，原因是' + data.responseText);
       },
     });
@@ -45,14 +47,14 @@ $(function () {
   function reloadPagenation() {
     $('.pagenation').show();
     if (max_page <= 6) {
-      for (var j = 2; j <= max_page; j++) {
-        var t = j - 1;
+      for (let j = 2; j <= max_page; j++) {
+        let t = j - 1;
         $('#page' + t).after('<a id="page' + j + '" href="#">' + j + '</a>');
       }
     } else {
       $('#page1').after('<a id="page2" href="#">2</a>');
-      for (var j = 3; j <= 5; j++) {
-        var t = j - 1;
+      for (let j = 3; j <= 5; j++) {
+        let t = j - 1;
         $('#page' + t).after('<a id="page' + j + '" href="#">.</a>');
       }
       $('#page5').after('<a id="page6" href="#">' + max_page + '</a>');
@@ -98,12 +100,12 @@ $(function () {
     $.ajax({
       type: 'POST',
       contentType: 'application/x-www-form-urlencoded',
-      url: host + '/store/getlogistics',
+      url: '/store/getlogistics',
       data: {
         page: now_page,
       },
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           logistics_list = data.data;
           reloadLogistics();
@@ -111,7 +113,7 @@ $(function () {
           alert('获取订单列表失败，原因是' + data.data.errMsg);
         }
       },
-      error: function (data) {
+      error(data) {
         alert('获取订单列表失败，原因是' + data.responseText);
       },
     });
@@ -157,11 +159,11 @@ $(function () {
             'data-i': i,
           });
           $('#get_logistics_' + i).hide();
-          $('#write_info_' + i).on('click', function () {
+          $('#write_info_' + i).on('click', () => {
             $(this).hide();
             var i = $(this).data('i');
             $(this).next().show();
-            $('#sub_info_' + i).on('click', function () {
+            $('#sub_info_' + i).on('click', () => {
               var id = $(this).data('id');
               var i = $(this).data('i');
               var company = $('#company_' + i).val();
@@ -174,21 +176,21 @@ $(function () {
                 $.ajax({
                   type: 'POST',
                   contentType: 'application/x-www-form-urlencoded',
-                  url: host + '/store/delivery',
+                  url: '/store/delivery',
                   data: {
                     id: id,
                     company: company,
                     number: num,
                   },
                   xhrFields: { withCredentials: true },
-                  success: function (data) {
+                  success(data) {
                     if (data.status == 'success') {
                       getLogisticsList();
                     } else {
                       alert('提交失败，原因是' + data.data.errMsg);
                     }
                   },
-                  error: function (data) {
+                  error(data) {
                     alert('提交失败，原因是' + data.responseText);
                   },
                 });
@@ -209,20 +211,20 @@ $(function () {
     var itemVO = [];
     $.ajax({
       type: 'GET',
-      url: host + '/item/get',
+      url: '/item/get',
       data: {
         id: id,
       },
       async: false,
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           itemVO = data.data;
         } else {
           alert('获取商品信息失败，原因是' + data.data.errMsg);
         }
       },
-      error: function (data) {
+      error(data) {
         alert('获取商品信息失败，原因是' + data.responseText);
       },
     });
@@ -233,20 +235,20 @@ $(function () {
     var orderVO = [];
     $.ajax({
       type: 'GET',
-      url: host + '/order/getbyid',
+      url: '/order/getbyid',
       data: {
         id: id,
       },
       async: false,
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           orderVO = data.data;
         } else {
           alert('获取订单信息失败，原因是' + data.data.errMsg);
         }
       },
-      error: function (data) {
+      error(data) {
         alert('获取订单信息失败，原因是' + data.responseText);
       },
     });
@@ -257,20 +259,20 @@ $(function () {
     var addressVO = [];
     $.ajax({
       type: 'GET',
-      url: host + '/address/get',
+      url: '/address/get',
       data: {
         id: id,
       },
       async: false,
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           addressVO = data.data;
         } else {
           alert('获取地址信息失败，原因是' + data.data.errMsg);
         }
       },
-      error: function (data) {
+      error(data) {
         alert('获取地址信息失败，原因是' + data.responseText);
       },
     });

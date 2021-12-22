@@ -1,10 +1,12 @@
-jQuery(document).ready(function () {
+import $ from 'jquery';
+
+$(() => {
   var new_itemList = [];
   $.ajax({
     type: 'GET',
-    url: host + '/item/listbyupdatetime',
+    url: '/item/listbyupdatetime',
     xhrFields: { withCredentials: true },
-    success: function (data) {
+    success(data) {
       if (data.status == 'success') {
         new_itemList = data.data;
         reloadNewItem(new_itemList);
@@ -12,7 +14,7 @@ jQuery(document).ready(function () {
         alert('获取新品推荐失败，原因是' + data.data.errMsg);
       }
     },
-    error: function (data) {
+    error(data) {
       alert('获取新品推荐失败，原因是' + data.responseText);
     },
   });
@@ -30,8 +32,8 @@ function reloadNewItem(list_data) {
     $('#goods_title_' + i).text(new_itemVO.title);
     $('#goods_img_' + i).attr('src', new_itemVO.imgUrl);
     $('#goods_price_' + i).text('￥ ' + new_itemVO.price.toFixed(2));
-    $('#itemDetail' + new_itemVO.id).on('click', function () {
-      window.location.href = 'detail.html?id=' + $(this).data('id');
+    $('#itemDetail' + new_itemVO.id).on('click', () => {
+      window.location.href = '/detail.html?id=' + $(this).data('id');
     });
   }
 }

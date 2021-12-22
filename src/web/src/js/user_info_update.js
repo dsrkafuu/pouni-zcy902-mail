@@ -1,4 +1,6 @@
-$(function () {
+import $ from 'jquery';
+
+$(() => {
   var userVO = [];
   function reloadUserInfo() {
     $('#name').val(userVO.name);
@@ -9,9 +11,9 @@ $(function () {
   }
   $.ajax({
     type: 'GET',
-    url: host + '/user/get',
+    url: '/user/get',
     xhrFields: { withCredentials: true },
-    success: function (data) {
+    success(data) {
       if (data.status == 'success') {
         userVO = data.data;
         reloadUserInfo();
@@ -19,11 +21,11 @@ $(function () {
         alert('获取用户信息失败，原因是' + data.data.errMsg);
       }
     },
-    error: function (data) {
+    error(data) {
       alert('获取用户信息失败，原因是' + data.responseText);
     },
   });
-  $('#update').on('click', function () {
+  $('#update').on('click', () => {
     var name = $('#name').val();
     var email = $('#email').val();
     var age = $('#age').val();
@@ -40,7 +42,7 @@ $(function () {
       $.ajax({
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
-        url: host + '/user/update',
+        url: '/user/update',
         data: {
           name: name,
           email: email,
@@ -48,37 +50,37 @@ $(function () {
           gender: gender,
         },
         xhrFields: { withCredentials: true },
-        success: function (data) {
+        success(data) {
           if (data.status == 'success') {
             alert('添加成功');
-            window.location.href = 'user_center_info.html';
+            window.location.href = '/user_center_info.html';
           } else {
             alert('添加失败，原因是' + data.data.errMsg);
           }
         },
-        error: function (data) {
+        error(data) {
           alert('添加失败，原因是' + data.responseText);
         },
       });
     }
   });
-  $('#logout').on('click', function () {
+  $('#logout').on('click', () => {
     $.ajax({
       type: 'GET',
-      url: host + '/user/logout',
+      url: '/user/logout',
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           alert('注销登录成功');
-          window.location.href = 'index.html';
+          window.location.href = '/index.html';
         } else {
           alert('注销登录失败，原因是' + data.data.errMsg);
           if (data.data.errCode == 20003) {
-            window.location.href = 'login.html';
+            window.location.href = '/login.html';
           }
         }
       },
-      error: function (data) {
+      error(data) {
         alert('注销登录失败，原因是' + data.responseText);
       },
     });

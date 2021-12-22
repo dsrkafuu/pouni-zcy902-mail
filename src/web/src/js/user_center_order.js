@@ -1,18 +1,20 @@
-$(function () {
+import $ from 'jquery';
+
+$(() => {
   var now_page = 1;
   var max_page = 1;
   var order_list = [];
   getMaxPage();
   getOrderList();
 
-  $('#pg_dn').on('click', function () {
+  $('#pg_dn').on('click', () => {
     if (now_page < max_page) {
       now_page++;
       getOrderList();
       reloadActivePage();
     }
   });
-  $('#pg_up').on('click', function () {
+  $('#pg_up').on('click', () => {
     if (now_page > 1) {
       now_page--;
       getOrderList();
@@ -20,23 +22,23 @@ $(function () {
     }
   });
 
-  $('#logout').on('click', function () {
+  $('#logout').on('click', () => {
     $.ajax({
       type: 'GET',
-      url: host + '/user/logout',
+      url: '/user/logout',
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           alert('注销登录成功');
-          window.location.href = 'index.html';
+          window.location.href = '/index.html';
         } else {
           alert('注销登录失败，原因是' + data.data.errMsg);
           if (data.data.errCode == 20003) {
-            window.location.href = 'login.html';
+            window.location.href = '/login.html';
           }
         }
       },
-      error: function (data) {
+      error(data) {
         alert('注销登录失败，原因是' + data.responseText);
       },
     });
@@ -45,9 +47,9 @@ $(function () {
   function getMaxPage() {
     $.ajax({
       type: 'GET',
-      url: host + '/order/count',
+      url: '/order/count',
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           var num = data.data;
           if (num != 0) {
@@ -57,11 +59,11 @@ $(function () {
         } else {
           alert('获取订单数量失败，原因是' + data.data.errMsg);
           if (data.data.errCode == 20003) {
-            window.location.href = 'login.html';
+            window.location.href = '/login.html';
           }
         }
       },
-      error: function (data) {
+      error(data) {
         alert('获取订单数量失败，原因是' + data.responseText);
       },
     });
@@ -70,14 +72,14 @@ $(function () {
   function reloadPagenation() {
     $('.pagenation').show();
     if (max_page <= 6) {
-      for (var j = 2; j <= max_page; j++) {
-        var t = j - 1;
+      for (let j = 2; j <= max_page; j++) {
+        let t = j - 1;
         $('#page' + t).after('<a id="page' + j + '" href="#">' + j + '</a>');
       }
     } else {
       $('#page1').after('<a id="page2" href="#">2</a>');
-      for (var j = 3; j <= 5; j++) {
-        var t = j - 1;
+      for (let j = 3; j <= 5; j++) {
+        let t = j - 1;
         $('#page' + t).after('<a id="page' + j + '" href="#">.</a>');
       }
       $('#page5').after('<a id="page6" href="#">' + max_page + '</a>');
@@ -118,12 +120,12 @@ $(function () {
   function getOrderList() {
     $.ajax({
       type: 'GET',
-      url: host + '/order/list',
+      url: '/order/list',
       data: {
         page: now_page,
       },
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           order_list = data.data;
           reloadOrder();
@@ -131,7 +133,7 @@ $(function () {
           alert('获取订单列表失败，原因是' + data.data.errMsg);
         }
       },
-      error: function (data) {
+      error(data) {
         alert('获取订单列表失败，原因是' + data.responseText);
       },
     });
@@ -170,28 +172,28 @@ $(function () {
           });
           $('#send_msg_' + i).hide();
           $('#get_logistics_' + i).hide();
-          $('#pay_btn_' + i).on('click', function () {
+          $('#pay_btn_' + i).on('click', () => {
             var id = $(this).data('id');
-            window.location.href = 'center-order.html?id=' + id;
+            window.location.href = '/center-order.html?id=' + id;
           });
-          $('#cancel_btn_' + i).on('click', function () {
+          $('#cancel_btn_' + i).on('click', () => {
             var id = $(this).data('id');
             $.ajax({
               type: 'POST',
               contentType: 'application/x-www-form-urlencoded',
-              url: host + '/order/cancel',
+              url: '/order/cancel',
               data: {
                 id: id,
               },
               xhrFields: { withCredentials: true },
-              success: function (data) {
+              success(data) {
                 if (data.status == 'success') {
                   window.location.reload();
                 } else {
                   alert('取消订单失败，原因是' + data.data.errMsg);
                 }
               },
-              error: function (data) {
+              error(data) {
                 alert('取消订单失败，原因是' + data.responseText);
               },
             });
@@ -217,20 +219,20 @@ $(function () {
     var itemVO = [];
     $.ajax({
       type: 'GET',
-      url: host + '/item/get',
+      url: '/item/get',
       data: {
         id: id,
       },
       async: false,
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           itemVO = data.data;
         } else {
           alert('获取商品信息失败，原因是' + data.data.errMsg);
         }
       },
-      error: function (data) {
+      error(data) {
         alert('获取商品信息失败，原因是' + data.responseText);
       },
     });

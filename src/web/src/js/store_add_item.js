@@ -1,5 +1,7 @@
-$(function () {
-  $('.info_submit').on('click', function () {
+import $ from 'jquery';
+
+$(() => {
+  $('.info_submit').on('click', () => {
     var title = $('#title').val();
     var description = $('#description').val();
     var sort = $('#sort option:selected').val();
@@ -20,7 +22,7 @@ $(function () {
       $.ajax({
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
-        url: host + '/item/create',
+        url: '/item/create',
         data: {
           title: title,
           description: description,
@@ -30,15 +32,15 @@ $(function () {
           imgUrl: imgUrl,
         },
         xhrFields: { withCredentials: true },
-        success: function (data) {
+        success(data) {
           if (data.status == 'success') {
             alert('添加成功');
-            window.location.href = 'store_center_all.html';
+            window.location.href = '/store_center_all.html';
           } else {
             alert('添加失败，原因是' + data.data.errMsg);
           }
         },
-        error: function (data) {
+        error(data) {
           alert('添加失败，原因是' + data.responseText);
         },
       });

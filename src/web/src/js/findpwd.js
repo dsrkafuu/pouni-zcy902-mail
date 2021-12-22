@@ -1,42 +1,44 @@
-$(function () {
+import $ from 'jquery';
+
+$(() => {
   var error_telphone = false;
   var error_check = false;
 
-  $('#tel').blur(function () {
+  $('#tel').blur(() => {
     check_telphone();
   });
 
-  $('#check').blur(function () {
+  $('#check').blur(() => {
     check_check();
   });
 
-  $('#get_otpCode').on('click', function () {
+  $('#get_otpCode').on('click', () => {
     check_telphone();
     if (error_telphone == false) {
       var telphone = $('#tel').val();
       $.ajax({
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
-        url: host + '/user/forgot',
+        url: '/user/forgot',
         data: {
           telphone: telphone,
         },
         xhrFields: { withCredentials: true },
-        success: function (data) {
+        success(data) {
           if (data.status == 'success') {
             alert('验证码发送成功');
           } else {
             alert('验证码发送失败，原因是' + data.data.errMsg);
           }
         },
-        error: function (data) {
+        error(data) {
           alert('验证码发送失败，原因是' + data.responseText);
         },
       });
     }
   });
 
-  $('#findpwd_sub').on('click', function () {
+  $('#findpwd_sub').on('click', () => {
     check_telphone();
     check_check();
 
@@ -46,24 +48,24 @@ $(function () {
       $.ajax({
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
-        url: host + '/user/check',
+        url: '/user/check',
         data: {
           telphone: telphone,
           otpCode: otp_code,
         },
         xhrFields: { withCredentials: true },
-        success: function (data) {
+        success(data) {
           if (data.status == 'success') {
-            window.location.href = 'skip-1-reset.html';
+            window.location.href = '/skip-1-reset.html';
           } else {
             if (data.data.errCode == 10001) {
-              window.location.href = 'skip-3.html';
+              window.location.href = '/skip-3.html';
             } else {
               alert('验证失败，原因是' + data.data.errMsg);
             }
           }
         },
-        error: function (data) {
+        error(data) {
           alert('验证失败，原因是' + data.responseText);
         },
       });

@@ -1,4 +1,6 @@
-$(function () {
+import $ from 'jquery';
+
+$(() => {
   var error_name = false;
   var error_telphone = false;
   var error_password = false;
@@ -7,35 +9,35 @@ $(function () {
   var error_check = false;
   var error_age = false;
 
-  $('#user_name').blur(function () {
+  $('#user_name').blur(() => {
     check_user_name();
   });
 
-  $('#tel').blur(function () {
+  $('#tel').blur(() => {
     check_telphone();
   });
 
-  $('#pwd').blur(function () {
+  $('#pwd').blur(() => {
     check_pwd();
   });
 
-  $('#cpwd').blur(function () {
+  $('#cpwd').blur(() => {
     check_cpwd();
   });
 
-  $('#email').blur(function () {
+  $('#email').blur(() => {
     check_email();
   });
 
-  $('#age').blur(function () {
+  $('#age').blur(() => {
     check_age();
   });
 
-  $('#check').blur(function () {
+  $('#check').blur(() => {
     check_check();
   });
 
-  $('#allow').click(function () {
+  $('#allow').click(() => {
     if ($(this).is(':checked')) {
       error_check = false;
       $(this).siblings('span').hide();
@@ -121,7 +123,7 @@ $(function () {
   }
 
   function check_email() {
-    var re = /^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$/;
+    var re = /^[a-z0-9][\w.-]*@[a-z0-9-]+(\.[a-z]{2,5}){1,2}$/;
 
     if (re.test($('#email').val())) {
       $('#email').next().hide();
@@ -133,19 +135,19 @@ $(function () {
     }
   }
 
-  $('#get_otpCode').on('click', function () {
+  $('#get_otpCode').on('click', () => {
     check_telphone();
     if (error_telphone == false) {
       var telphone = $('#tel').val();
       $.ajax({
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
-        url: host + '/user/getotp',
+        url: '/user/getotp',
         data: {
           telphone: telphone,
         },
         xhrFields: { withCredentials: true },
-        success: function (data) {
+        success(data) {
           if (data.status == 'success') {
             alert(
               '验证码发送成功，可惜只发给了管理员（我是不会告诉你管理员穷到买不起短信服务的T_T），快找管理员要验证码吧'
@@ -154,14 +156,14 @@ $(function () {
             alert('验证码发送失败，原因是' + data.data.errMsg);
           }
         },
-        error: function (data) {
+        error(data) {
           alert('验证码发送失败，原因是' + data.responseText);
         },
       });
     }
   });
 
-  $('#register_sub').on('click', function () {
+  $('#register_sub').on('click', () => {
     check_user_name();
     check_telphone();
     check_pwd();
@@ -190,7 +192,7 @@ $(function () {
       $.ajax({
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
-        url: host + '/user/register',
+        url: '/user/register',
         data: {
           telphone: telphone,
           otpCode: otp_code,
@@ -201,15 +203,15 @@ $(function () {
           password: password,
         },
         xhrFields: { withCredentials: true },
-        success: function (data) {
+        success(data) {
           if (data.status == 'success') {
             alert('注册成功');
-            window.location.href = 'login.html';
+            window.location.href = '/login.html';
           } else {
             alert('注册失败，原因是' + data.data.errMsg);
           }
         },
-        error: function (data) {
+        error(data) {
           alert('注册失败，原因是' + data.responseText);
         },
       });

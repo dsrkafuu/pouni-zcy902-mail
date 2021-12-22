@@ -1,12 +1,14 @@
-$(function () {
+import $ from 'jquery';
+
+$(() => {
   var error_password = false;
   var error_check_password = false;
 
-  $('#pwd').blur(function () {
+  $('#pwd').blur(() => {
     check_pwd();
   });
 
-  $('#cpwd').blur(function () {
+  $('#cpwd').blur(() => {
     check_cpwd();
   });
   function check_pwd() {
@@ -35,7 +37,7 @@ $(function () {
     }
   }
 
-  $('#reset_sub').on('click', function () {
+  $('#reset_sub').on('click', () => {
     check_pwd();
     check_cpwd();
 
@@ -44,24 +46,24 @@ $(function () {
       $.ajax({
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
-        url: host + '/user/reset',
+        url: '/user/reset',
         data: {
           password: password,
         },
         xhrFields: { withCredentials: true },
-        success: function (data) {
+        success(data) {
           if (data.status == 'success') {
-            window.location.href = 'skip-2.html';
+            window.location.href = '/skip-2.html';
           } else {
             alert('新密码设置失败，原因是' + data.data.errMsg);
             if (data.data.errCode == 20005) {
-              window.location.href = 'findpwd.html';
+              window.location.href = '/findpwd.html';
             } else if (data.data.errCode == 10001) {
               clearPassword();
             }
           }
         },
-        error: function (data) {
+        error(data) {
           alert('新密码设置失败，原因是' + data.responseText);
         },
       });

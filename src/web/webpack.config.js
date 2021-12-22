@@ -69,8 +69,8 @@ module.exports = {
   devServer: {
     port: 3000,
     hot: false,
-    liveReload: false,
-    watchFiles: ['src/**/*'],
+    liveReload: true,
+    watchFiles: ['src/**/*', 'public/**/*'],
     proxy: {
       '**': 'http://localhost:8085',
     },

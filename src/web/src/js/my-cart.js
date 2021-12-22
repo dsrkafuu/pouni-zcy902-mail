@@ -1,9 +1,11 @@
+import $ from 'jquery';
+
 function getCartNum() {
   $.ajax({
     type: 'GET',
-    url: host + '/cart/getnum',
+    url: '/cart/getnum',
     xhrFields: { withCredentials: true },
-    success: function (data) {
+    success(data) {
       if (data.status == 'success') {
         var n = data.data;
         reloadCartNum(n);
@@ -11,7 +13,7 @@ function getCartNum() {
         $('.goods_count').hide();
       }
     },
-    error: function (data) {
+    error() {
       $('.goods_count').hide();
     },
   });
@@ -22,6 +24,6 @@ function reloadCartNum(n) {
   $('.goods_count').show();
 }
 
-jQuery(document).ready(function () {
+$(() => {
   getCartNum();
 });

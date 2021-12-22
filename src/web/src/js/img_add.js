@@ -1,5 +1,7 @@
-$(function () {
-  $('#file').change(function () {
+import $ from 'jquery';
+
+$(() => {
+  $('#file').change(() => {
     var images = $('#file')[0].files;
     if (images.length == 0) {
       alert('请选择图片上传');
@@ -27,7 +29,7 @@ $(function () {
         //加载图片获取图片真实宽度和高度
         var image = new Image();
         image.src = data;
-        image.onload = function () {
+        image.onload = () => {
           var width = image.width;
           var height = image.height;
           if (width <= 500 && height <= 500) {
@@ -37,13 +39,13 @@ $(function () {
             params.append('file', images[0]);
             $.ajax({
               type: 'POST',
-              url: host + '/item/single',
+              url: '/item/single',
               data: params,
               xhrFields: { withCredentials: true },
               cache: false,
               processData: false,
               contentType: false,
-              success: function (data) {
+              success(data) {
                 if (data.status == 'success') {
                   $('#imgUrl').val(data.data);
                   $('#upload_img').attr('src', data.data);
@@ -51,7 +53,7 @@ $(function () {
                   alert('上传失败，原因是' + data.data.errMsg);
                 }
               },
-              error: function (data) {
+              error(data) {
                 alert('上传失败，原因是' + data.responseText);
               },
             });

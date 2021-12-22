@@ -1,4 +1,6 @@
-$(function () {
+import $ from 'jquery';
+
+$(() => {
   var storeVO = [];
   function reloadSoreInfo() {
     var htmlContent = '';
@@ -20,9 +22,9 @@ $(function () {
   }
   $.ajax({
     type: 'GET',
-    url: host + '/store/get',
+    url: '/store/get',
     xhrFields: { withCredentials: true },
-    success: function (data) {
+    success(data) {
       if (data.status == 'success') {
         storeVO = data.data;
         reloadSoreInfo();
@@ -30,7 +32,7 @@ $(function () {
         alert('获取商铺信息失败，原因是' + data.data.errMsg);
       }
     },
-    error: function (data) {
+    error(data) {
       alert('获取商铺信息失败，原因是' + data.responseText);
     },
   });

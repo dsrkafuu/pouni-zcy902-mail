@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 var emptyAccount = false;
 var emptyPassword = false;
 
@@ -23,16 +25,16 @@ function check_password() {
   }
 }
 
-jQuery(document).ready(function () {
-  $('#user_account').blur(function () {
+$(() => {
+  $('#user_account').blur(() => {
     check_account();
   });
 
-  $('#user_password').blur(function () {
+  $('#user_password').blur(() => {
     check_password();
   });
 
-  $('#login_btn').on('click', function () {
+  $('#login_btn').on('click', () => {
     check_account();
     check_password();
     if (emptyAccount == false && emptyPassword == false) {
@@ -41,21 +43,21 @@ jQuery(document).ready(function () {
       $.ajax({
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
-        url: host + '/store/login',
+        url: '/store/login',
         data: {
           telphone: account,
           password: password,
         },
         xhrFields: { withCredentials: true },
-        success: function (data) {
+        success(data) {
           if (data.status == 'success') {
             alert('登录成功');
-            window.location.href = 'store_center_info.html';
+            window.location.href = '/store_center_info.html';
           } else {
             alert('登录失败，原因是' + data.data.errMsg);
           }
         },
-        error: function (data) {
+        error(data) {
           alert('登录失败，原因是' + data.responseText);
         },
       });

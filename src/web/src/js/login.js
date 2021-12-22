@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 var isEmail = false;
 var emptyAccount = false;
 var emptyPassword = false;
@@ -25,7 +27,7 @@ function check_password() {
 }
 
 function judge_is_email() {
-  var re = /^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$/;
+  var re = /^[a-z0-9][\w.-]*@[a-z0-9-]+(\.[a-z]{2,5}){1,2}$/;
   if (re.test($('#user_account').val())) {
     isEmail = true;
   } else {
@@ -33,16 +35,16 @@ function judge_is_email() {
   }
 }
 
-jQuery(document).ready(function () {
-  $('#user_account').blur(function () {
+$(() => {
+  $('#user_account').blur(() => {
     check_account($(this).val());
   });
 
-  $('#user_password').blur(function () {
+  $('#user_password').blur(() => {
     check_password($(this).val());
   });
 
-  $('#login_btn').on('click', function () {
+  $('#login_btn').on('click', () => {
     check_account();
     check_password();
     judge_is_email();
@@ -53,21 +55,21 @@ jQuery(document).ready(function () {
         $.ajax({
           type: 'POST',
           contentType: 'application/x-www-form-urlencoded',
-          url: host + '/user/loginbyemail',
+          url: '/user/loginbyemail',
           data: {
             email: account,
             password: password,
           },
           xhrFields: { withCredentials: true },
-          success: function (data) {
+          success(data) {
             if (data.status == 'success') {
               alert('登录成功');
-              window.location.href = 'index.html';
+              window.location.href = '/index.html';
             } else {
               alert('登录失败，原因是' + data.data.errMsg);
             }
           },
-          error: function (data) {
+          error(data) {
             alert('登录失败，原因是' + data.responseText);
           },
         });
@@ -75,21 +77,21 @@ jQuery(document).ready(function () {
         $.ajax({
           type: 'POST',
           contentType: 'application/x-www-form-urlencoded',
-          url: host + '/user/loginbytelphone',
+          url: '/user/loginbytelphone',
           data: {
             telphone: account,
             password: password,
           },
           xhrFields: { withCredentials: true },
-          success: function (data) {
+          success(data) {
             if (data.status == 'success') {
               alert('登录成功');
-              window.location.href = 'index.html';
+              window.location.href = '/index.html';
             } else {
               alert('登录失败，原因是' + data.data.errMsg);
             }
           },
-          error: function (data) {
+          error(data) {
             alert('登录失败，原因是' + data.responseText);
           },
         });

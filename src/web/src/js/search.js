@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 var now_page = 1;
 var max_page = 1;
 
@@ -12,12 +14,12 @@ function getMaxPage() {
   $.ajax({
     type: 'POST',
     contentType: 'application/x-www-form-urlencoded',
-    url: host + '/item/searchresult',
+    url: '/item/searchresult',
     data: {
       keyWord: GetQueryString('keyword'),
     },
     xhrFields: { withCredentials: true },
-    success: function (data) {
+    success(data) {
       if (data.status == 'success') {
         var num = data.data;
         if (num != 0) {
@@ -26,7 +28,7 @@ function getMaxPage() {
         reloadPagenation();
       }
     },
-    error: function (data) {
+    error(data) {
       alert('获取商品数量失败，原因是' + data.responseText);
     },
   });
@@ -56,22 +58,22 @@ function reloadItem(itemList) {
     $('#item_' + i)
       .find('span.unit')
       .html('/一件');
-    $('#item_' + i).on('click', function () {
-      window.location.href = 'detail.html?id=' + $(this).data('id');
+    $('#item_' + i).on('click', () => {
+      window.location.href = '/detail.html?id=' + $(this).data('id');
     });
   }
 }
 
 function reloadPagenation() {
   if (max_page <= 6) {
-    for (var j = 2; j <= max_page; j++) {
-      var t = j - 1;
+    for (let j = 2; j <= max_page; j++) {
+      let t = j - 1;
       $('#page' + t).after('<a id="page' + j + '" href="#">' + j + '</a>');
     }
   } else {
     $('#page1').after('<a id="page2" href="#">2</a>');
-    for (var j = 3; j <= 5; j++) {
-      var t = j - 1;
+    for (let j = 3; j <= 5; j++) {
+      let t = j - 1;
       $('#page' + t).after('<a id="page' + j + '" href="#">.</a>');
     }
     $('#page5').after('<a id="page6" href="#">' + max_page + '</a>');
@@ -113,13 +115,13 @@ function getItemList() {
   $.ajax({
     type: 'POST',
     contentType: 'application/x-www-form-urlencoded',
-    url: host + '/item/search',
+    url: '/item/search',
     data: {
       keyWord: GetQueryString('keyword'),
       page: now_page,
     },
     xhrFields: { withCredentials: true },
-    success: function (data) {
+    success(data) {
       if (data.status == 'success') {
         var itemList = data.data;
         getMaxPage();
@@ -128,24 +130,24 @@ function getItemList() {
         alert('搜素失败，原因是' + data.data.errMsg);
       }
     },
-    error: function (data) {
+    error(data) {
       alert('搜索失败，原因是' + data.responseText);
     },
   });
 }
 
-jQuery(document).ready(function () {
+$(() => {
   $('#search_title').html('搜索：' + GetQueryString('keyword'));
   getMaxPage();
   getItemList();
-  $('#pg_dn').on('click', function () {
+  $('#pg_dn').on('click', () => {
     if (now_page < max_page) {
       now_page++;
       getItemList();
       reloadActivePage();
     }
   });
-  $('#pg_up').on('click', function () {
+  $('#pg_up').on('click', () => {
     if (now_page > 1) {
       now_page--;
       getItemList();

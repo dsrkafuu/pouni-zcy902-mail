@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 function reloadUserName(user_name) {
   $('.login_info').html('欢迎您：<em>' + user_name + '</em>');
   $('.login_info').show();
@@ -8,9 +10,9 @@ function getLoginUser() {
   var userVO = [];
   $.ajax({
     type: 'GET',
-    url: host + '/user/get',
+    url: '/user/get',
     xhrFields: { withCredentials: true },
-    success: function (data) {
+    success(data) {
       if (data.status == 'success') {
         userVO = data.data;
         reloadUserName(userVO.name);
@@ -19,13 +21,13 @@ function getLoginUser() {
         $('.login_btn').show();
       }
     },
-    error: function (data) {
+    error() {
       $('.login_info').hide();
       $('.login_btn').show();
     },
   });
 }
 
-jQuery(document).ready(function () {
+$(() => {
   getLoginUser();
 });

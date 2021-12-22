@@ -1,64 +1,72 @@
-$(function () {
-  function GetQueryString(name) {
-    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return decodeURI(r[2]);
-    return null;
+import $ from 'jquery';
+
+function GetQueryString(name) {
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+  const r = window.location.search.substr(1).match(reg);
+  if (r != null) {
+    return decodeURI(r[2]);
   }
-  var id = GetQueryString('id');
-  var itemVO = [];
-  var orderVO = [];
-  var address_list = [];
+  return null;
+}
+
+$(() => {
+  let id = GetQueryString('id');
+  let itemVO = [];
+  let orderVO = [];
+  let address_list = [];
+
   $.ajax({
     type: 'GET',
-    url: host + '/address/list',
+    url: '/address/list',
     xhrFields: { withCredentials: true },
-    success: function (data) {
+    success(data) {
       if (data.status == 'success') {
         address_list = data.data;
         reloadAddress();
       } else {
         alert('加载地址信息失败，原因是' + data.data.errMsg);
         if (data.data.errCode == 20003) {
-          window.location.href = 'login.html';
+          window.location.href = '/login.html';
         }
       }
     },
-    error: function (data) {
+    error(data) {
       alert('加载地址信息失败，原因是' + data.responseText);
     },
   });
+
   $.ajax({
     type: 'GET',
-    url: host + '/order/getbyid',
+    url: '/order/getbyid',
     data: {
       id: id,
     },
     xhrFields: { withCredentials: true },
-    success: function (data) {
+    success(data) {
       if (data.status == 'success') {
         orderVO = data.data;
         getItem();
       } else {
         alert('加载订单失败，原因是' + data.data.errMsg);
         if (data.data.errCode == 20003) {
-          window.location.href = 'login.html';
+          window.location.href = '/login.html';
         }
       }
     },
-    error: function (data) {
+    error(data) {
       alert('加载订单失败，原因是' + data.responseText);
     },
   });
+
   function getItem() {
     $.ajax({
       type: 'GET',
-      url: host + '/item/get',
+      url: '/item/get',
       data: {
         id: orderVO.itemId,
       },
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           itemVO = data.data;
           reloadOrderList();
@@ -66,7 +74,7 @@ $(function () {
           alert('获取商品信息失败，原因是' + data.data.errMsg);
         }
       },
-      error: function (data) {
+      error(data) {
         alert('获取商品信息失败，原因是' + data.responseText);
       },
     });
@@ -129,34 +137,34 @@ $(function () {
       $('#order_list').append(htmlContent);
       $('#amount').html(amount);
       $('.total').html(total.toFixed(2) + '元');
-      $('#order_btn').on('click', function () {
+      $('#order_btn').on('click', () => {
         var paymentMethod = $('input[name="pay_style"]:checked').val();
         var addressId = $('input[name="address"]:checked').val();
         $.ajax({
           type: 'POST',
           contentType: 'application/x-www-form-urlencoded',
-          url: host + '/order/complete',
+          url: '/order/complete',
           data: {
             id: orderVO.id,
             paymentMethod: paymentMethod,
             addressId: addressId,
           },
           xhrFields: { withCredentials: true },
-          success: function (data) {
+          success(data) {
             if (data.status == 'success') {
               alert('提交订单成功');
-              window.location.href = 'user_center_order.html';
+              window.location.href = '/user_center_order.html';
             } else {
               alert('提交订单失败，原因是' + data.data.errMsg);
               if (data.data.errCode == 20003) {
-                window.location.href = 'login.html';
+                window.location.href = '/login.html';
               }
-              window.location.href = 'user_center_order.html';
+              window.location.href = '/user_center_order.html';
             }
           },
-          error: function (data) {
+          error(data) {
             alert('提交订单失败，原因是' + data.responseText);
-            window.location.href = 'user_center_order.html';
+            window.location.href = '/user_center_order.html';
           },
         });
       });

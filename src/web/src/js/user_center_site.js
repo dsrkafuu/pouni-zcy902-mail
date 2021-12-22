@@ -1,4 +1,6 @@
-$(function () {
+import $ from 'jquery';
+
+$(() => {
   var address_list = [];
   function reloadAddressList() {
     if (address_list != null) {
@@ -23,24 +25,24 @@ $(function () {
         htmlContent += '>设为默认 </dd>';
         $('#address_list').append(htmlContent);
         if (addressVO.status == 2) {
-          $('#address_' + addressVO.id).on('click', function () {
+          $('#address_' + addressVO.id).on('click', () => {
             var id = $(this).val();
             $.ajax({
               type: 'POST',
               contentType: 'application/x-www-form-urlencoded',
-              url: host + '/address/set',
+              url: '/address/set',
               data: {
                 id: id,
               },
               xhrFields: { withCredentials: true },
-              success: function (data) {
+              success(data) {
                 if (data.status == 'success') {
                   window.location.reload();
                 } else {
                   alert('设置失败，原因是' + data.data.errMsg);
                 }
               },
-              error: function (data) {
+              error(data) {
                 alert('设置失败，原因是' + data.responseText);
               },
             });
@@ -52,9 +54,9 @@ $(function () {
 
   $.ajax({
     type: 'GET',
-    url: host + '/address/list',
+    url: '/address/list',
     xhrFields: { withCredentials: true },
-    success: function (data) {
+    success(data) {
       if (data.status == 'success') {
         address_list = data.data;
         reloadAddressList();
@@ -62,12 +64,12 @@ $(function () {
         alert('获取地址列表失败，原因是' + data.data.errMsg);
       }
     },
-    error: function (data) {
+    error(data) {
       alert('获取地址列表失败，原因是' + data.responseText);
     },
   });
 
-  $('#sub_bnt').on('click', function () {
+  $('#sub_bnt').on('click', () => {
     var name = $('#name').val();
     var address = $('#address').val();
     var postcode = $('#postcode').val();
@@ -84,7 +86,7 @@ $(function () {
       $.ajax({
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
-        url: host + '/address/create',
+        url: '/address/create',
         data: {
           addresseeName: name,
           address: address,
@@ -92,7 +94,7 @@ $(function () {
           addresseeTelphone: telphone,
         },
         xhrFields: { withCredentials: true },
-        success: function (data) {
+        success(data) {
           if (data.status == 'success') {
             alert('提交成功');
             window.location.reload();
@@ -100,30 +102,30 @@ $(function () {
             alert('提交失败，原因是' + data.data.errMsg);
           }
         },
-        error: function (data) {
+        error(data) {
           alert('提交失败，原因是' + data.responseText);
         },
       });
     }
   });
 
-  $('#logout').on('click', function () {
+  $('#logout').on('click', () => {
     $.ajax({
       type: 'GET',
-      url: host + '/user/logout',
+      url: '/user/logout',
       xhrFields: { withCredentials: true },
-      success: function (data) {
+      success(data) {
         if (data.status == 'success') {
           alert('注销登录成功');
-          window.location.href = 'index.html';
+          window.location.href = '/index.html';
         } else {
           alert('注销登录失败，原因是' + data.data.errMsg);
           if (data.data.errCode == 20003) {
-            window.location.href = 'login.html';
+            window.location.href = '/login.html';
           }
         }
       },
-      error: function (data) {
+      error(data) {
         alert('注销登录失败，原因是' + data.responseText);
       },
     });
