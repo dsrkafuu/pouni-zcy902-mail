@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>QUALITY HOME-用户中心</title>
+  <script src="library/jquery-1.12.4.min.js"></script>
+  <script src="library/jquery-ui.min.js"></script>
+  <script src="library/jquery.cookie-1.4.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/main.css" />
+	<script type="text/javascript" src="assets/ajax-config.js"></script>
+</head>
+<body>
+	<div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到QUALITY HOME!</div>
+			<div class="fr">
+				<div class="login_info fl">
+					欢迎您：<em>张 山</em>
+				</div>
+				<div class="login_btn fl">
+					<a href="login.html">登录</a>
+					<span>|</span>
+					<a href="register.html">注册</a>
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="user_center_info.html">用户中心</a>
+					<span>|</span>
+					<a href="cart.html">我的购物车</a>
+					<span>|</span>
+					<a href="user_center_order.html">我的订单</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="search_bar clearfix">
+		<a href="index.html" class="logo fl"><img src="images/logo.png"width="150px" height="150px"></a>
+		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;用户中心&nbsp;<a href="#" id="logout">&nbsp;注销登陆&nbsp;</a></div>
+		<div class="search_con fr">
+			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+			<input type="button" class="input_btn fr" name="" value="搜索">
+		</div>
+	</div>
+
+	<div class="main_con clearfix">
+		<div class="left_menu_con clearfix">
+			<h3>用户中心</h3>
+			<ul>
+				<li><a href="user_center_info.html">· 个人信息</a></li>
+				<li><a href="user_center_order.html" class="active">· 全部订单</a></li>
+				<li><a href="user_center_site.html">· 收货地址</a></li>
+			</ul>
+		</div>
+		<div class="right_content clearfix">
+			<h3 class="common_title2">全部订单</h3>
+
+			<div class="order_list" id="order_0">
+				<ul class="order_list_th w978 clearfix">
+					<li class="col01" id="time_0">2016-8-21 17:36:24</li>
+					<li class="col02">订单号：<em id="order_id_0">56872934</em></li>
+					<li class="col02 stress " id="order_status_0">已支付</li>
+				</ul>
+				<table class="order_list_table w980 store_h">
+					<tbody>
+					<tr >
+						<td width="25%">
+							<ul class=" store_h clearfix">
+								<li class="col01"><img src="images/goods02.jpg" id="img_0"></li>
+								<li class="col02" id="title_0">家具</li>
+							</ul>
+						</td>
+						<td width="15%">
+							<ul>
+								<li class="col03" >数量：<em id="amount_0">1</em>件</li>
+							</ul>
+						</td>
+						<td width="15%">
+							<ul>
+								<li class="col04">价格：<br/><em id="price_0">9999</em>元</li>
+							</ul>
+						</td>
+						<td width="15%" class="col04">共计：<br/><em id="total_0">9999</em>元</td>
+						<td width="15%" id="logistics_status_0">已付款</td>
+						<td width="15%">
+							<a href="#" class="oper_btn" id="pay_btn_0">去付款</a>
+							<a href="#" class="oper_btn" id="cancel_btn_0">取消订单</a>
+							<a href="#" class="oper_btn" id="send_msg_0">提醒发货</a>
+							<a href="#" class="oper_btn" id="get_logistics_0">查看物流</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="order_list" id="order_1">
+				<ul class="order_list_th w978 clearfix">
+					<li class="col01" id="time_1">2016-8-21 17:36:24</li>
+					<li class="col02">订单号：<em id="order_id_1">56872934</em></li>
+					<li class="col02 stress " id="order_status_1">已支付</li>
+				</ul>
+				<table class="order_list_table w980 store_h">
+					<tbody>
+					<tr >
+						<td width="25%">
+							<ul class=" store_h clearfix">
+								<li class="col01"><img src="images/goods02.jpg" id="img_1"></li>
+								<li class="col02" id="title_1">家具</li>
+							</ul>
+						</td>
+						<td width="15%">
+							<ul>
+								<li class="col03" >数量：<em id="amount_1">1</em>件</li>
+							</ul>
+						</td>
+						<td width="15%">
+							<ul>
+								<li class="col04">价格：<br/><em id="price_1">9999</em>元</li>
+							</ul>
+						</td>
+						<td width="15%" class="col04">共计：<br/><em id="total_1">9999</em>元</td>
+						<td width="15%" id="logistics_status_1">已付款</td>
+						<td width="15%">
+							<a href="#" class="oper_btn" id="pay_btn_1">去付款</a>
+							<a href="#" class="oper_btn" id="cancel_btn_1">取消订单</a>
+							<a href="#" class="oper_btn" id="send_msg_1">提醒发货</a>
+							<a href="#" class="oper_btn" id="get_logistics_1">查看物流</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="order_list" id="order_2">
+				<ul class="order_list_th w978 clearfix">
+					<li class="col01" id="time_2">2016-8-21 17:36:24</li>
+					<li class="col02">订单号：<em id="order_id_2">56872934</em></li>
+					<li class="col02 stress " id="order_status_2">已支付</li>
+				</ul>
+				<table class="order_list_table w980 store_h">
+					<tbody>
+					<tr >
+						<td width="25%">
+							<ul class=" store_h clearfix">
+								<li class="col01"><img src="images/goods02.jpg" id="img_2"></li>
+								<li class="col02" id="title_2">家具</li>
+							</ul>
+						</td>
+						<td width="15%">
+							<ul>
+								<li class="col03" >数量：<em id="amount_2">1</em>件</li>
+							</ul>
+						</td>
+						<td width="15%">
+							<ul>
+								<li class="col04">价格：<br/><em id="price_2">9999</em>元</li>
+							</ul>
+						</td>
+						<td width="15%" class="col04">共计：<br/><em id="total_2">9999</em>元</td>
+						<td width="15%" id="logistics_status_2">已付款</td>
+						<td width="15%">
+							<a href="#" class="oper_btn" id="pay_btn_2">去付款</a>
+							<a href="#" class="oper_btn" id="cancel_btn_2">取消订单</a>
+							<a href="#" class="oper_btn" id="send_msg_2">提醒发货</a>
+							<a href="#" class="oper_btn" id="get_logistics_2">查看物流</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+
+			<div class="pagenation">
+				<a href="#focus" id="pg_up">上一页</a>
+				<a id="page1" href="#" class="active">1</a>
+				<a href="#focus" id="pg_dn">下一页></a>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="footer">
+		<div class="foot_link">
+			<a href="#">关于我们</a>
+			<span>|</span>
+			<a href="#">联系我们</a>
+			<span>|</span>
+			<a href="#">招聘人才</a>
+			<span>|</span>
+			<a href="#">友情链接</a>
+		</div>
+		<p>CopyRight © 2016 北京QUALITY HOME信息技术有限公司 All Rights Reserved</p>
+		<p>电话：010-****888    京ICP备*******8号</p>
+	</div>
+	<script type="text/javascript" src="assets/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="assets/head.js"></script>
+	<script type="text/javascript" src="assets/search-btn.js"></script>
+	<script type="text/javascript" src="assets/user_center_order.js"></script>
+
+</body>
+</html>
