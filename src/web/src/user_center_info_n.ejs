@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <title>QUALITY HOME-用户中心</title>
-    <script src="library/jquery-1.12.4.min.js"></script>
-    <script src="library/jquery-ui.min.js"></script>
-    <script src="library/jquery.cookie-1.4.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/main.css" />
-    <script type="text/javascript" src="assets/ajax-config.js"></script>
+    <% var data={title:'用户中心'} %><% include ejs/head.ejs %>
+    <script defer src="/assets/ajax-config.js"></script>
+    <script defer src="/assets/head.js"></script>
+    <script defer src="/assets/search-btn.js"></script>
+    <script defer src="/assets/user_info_update.js"></script>
   </head>
+
   <body>
     <div class="header_con">
       <div class="header">
@@ -168,9 +167,5 @@
       </p>
       <p>电话：010-****888 京ICP备*******8号</p>
     </div>
-    <script type="text/javascript" src="assets/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="assets/head.js"></script>
-    <script type="text/javascript" src="assets/search-btn.js"></script>
-    <script type="text/javascript" src="assets/user_info_update.js"></script>
   </body>
 </html>

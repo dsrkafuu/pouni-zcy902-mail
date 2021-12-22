@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <title>QUALITY HOME-商品详情</title>
-    <script src="library/jquery-1.12.4.min.js"></script>
-    <script src="library/jquery-ui.min.js"></script>
-    <script src="library/jquery.cookie-1.4.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/main.css" />
-    <script type="text/javascript" src="assets/ajax-config.js"></script>
+    <% var data={title:'商品详情'} %><% include ejs/head.ejs %>
+    <script defer src="/assets/detail.js"></script>
+    <script defer src="/assets/search-btn.js"></script>
+    <script defer src="/assets/head.js"></script>
+    <script defer src="/assets/new.js"></script>
+    <script defer src="/assets/my-cart.js"></script>
   </head>
+
   <body>
     <div class="header_con">
       <div class="header">
@@ -223,11 +223,5 @@
       <p>电话：010-****888 京ICP备*******8号</p>
     </div>
     <div class="add_jump"></div>
-
-    <script type="text/javascript" src="assets/detail.js"></script>
-    <script type="text/javascript" src="assets/search-btn.js"></script>
-    <script type="text/javascript" src="assets/head.js"></script>
-    <script type="text/javascript" src="assets/new.js"></script>
-    <script type="text/javascript" src="assets/my-cart.js"></script>
   </body>
 </html>

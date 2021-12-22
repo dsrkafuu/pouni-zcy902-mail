@@ -13,10 +13,10 @@ jsInputs.forEach((entry) => {
   jsEntrys[basename] = { import: entry, filename: `assets/${basename}.js` };
 });
 
-const htmlInputs = glob.sync('./src/*.html');
+const htmlInputs = glob.sync('./src/*.ejs');
 const htmlPlugins = [];
 htmlInputs.forEach((input) => {
-  const basename = path.basename(input, '.html');
+  const basename = path.basename(input, '.ejs');
   htmlPlugins.push(
     new HtmlWebpackPlugin({
       template: input,
@@ -45,6 +45,10 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           { loader: 'css-loader', options: { url: false } },
         ],
+      },
+      {
+        test: /\.ejs$/,
+        loader: 'ejs-compiled-loader',
       },
     ],
   },

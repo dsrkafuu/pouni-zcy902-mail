@@ -1,98 +1,87 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<title>QUALITY HOME-商铺中心</title>
-  <script src="library/jquery-1.12.4.min.js"></script>
-  <script src="library/jquery-ui.min.js"></script>
-  <script src="library/jquery.cookie-1.4.1.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="assets/main.css" />
-	<script type="text/javascript" src="assets/ajax-config.js"></script>
-</head>
-<body>
-	<div class="header_con">
-		<div class="header">
-			<div class="welcome fl">欢迎来到QUALITY HOME! &nbsp;—— 商铺中心</div>
-			<div class="fr">
-<!--				<div class="login_info fl">-->
-<!--					欢迎您：<em>张 山</em>-->
-<!--				</div>-->
-				</div>
-			</div>
-		</div>
-	</div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <% var data={title:'商铺中心'} %><% include ejs/head.ejs %>
+    <script defer src="/assets/ajax-config.js"></script>
+    <script defer src="/assets/store_center_info.js"></script>
+  </head>
 
-	<div class="search_bar clearfix">
-		<a href="#" class="logo fl"><img src="images/logo.png"width="150px" height="150px"></a>
-		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;商铺中心</div>
-<!--		<div class="search_con fr">-->
-<!--			<input type="text" class="input_text fl" name="" placeholder="搜索商品" id="search">-->
-<!--			<input type="button" class="input_btn fr" name="" value="搜索">-->
-<!--		</div>		-->
-	</div>
+  <body>
+    <div class="header_con">
+      <div class="header">
+        <div class="welcome fl">欢迎来到QUALITY HOME! &nbsp;—— 商铺中心</div>
+        <div class="fr">
+          <!--				<div class="login_info fl">-->
+          <!--					欢迎您：<em>张 山</em>-->
+          <!--				</div>-->
+        </div>
+      </div>
+    </div>
 
-	<div class="main_con clearfix">
-		<div class="left_menu_con clearfix">
-			<h3>商铺中心</h3>
-			<ul>
-				<li><a href="store_center_info.html" class="active">· 商铺信息</a></li>
-				<li><a href="store_center_manage.html">· 商铺订单管理</a></li>
-				<li><a href="store_center_all.html">· 所有商品</a></li>
-			</ul>
-		</div>
-		<div class="right_content_store clearfix">
-			<div class="info_con ">
-			<h3 class="common_title2">基本信息</h3>
-				<div class="store_info">
-					<ul class="user_info_list" id="store_info">
+    <div class="search_bar clearfix">
+      <a href="#" class="logo fl"
+        ><img src="images/logo.png" width="150px" height="150px"
+      /></a>
+      <div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;商铺中心</div>
+      <!--		<div class="search_con fr">-->
+      <!--			<input type="text" class="input_text fl" name="" placeholder="搜索商品" id="search">-->
+      <!--			<input type="button" class="input_btn fr" name="" value="搜索">-->
+      <!--		</div>		-->
+    </div>
 
-					</ul>
+    <div class="main_con clearfix">
+      <div class="left_menu_con clearfix">
+        <h3>商铺中心</h3>
+        <ul>
+          <li>
+            <a href="store_center_info.html" class="active">· 商铺信息</a>
+          </li>
+          <li><a href="store_center_manage.html">· 商铺订单管理</a></li>
+          <li><a href="store_center_all.html">· 所有商品</a></li>
+        </ul>
+      </div>
+      <div class="right_content_store clearfix">
+        <div class="info_con">
+          <h3 class="common_title2">基本信息</h3>
+          <div class="store_info">
+            <ul class="user_info_list" id="store_info"></ul>
 
-					<ul class="user_info_list-a">
-<!--						<li><a href="#">修改信息</a></li>			-->
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="right_content_store clearfix">
-			<div class="info_con ">
-			<h3 class="common_title2">商铺状态</h3>
-				<div class="store_info">
+            <ul class="user_info_list-a">
+              <!--						<li><a href="#">修改信息</a></li>			-->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="right_content_store clearfix">
+        <div class="info_con">
+          <h3 class="common_title2">商铺状态</h3>
+          <div class="store_info">
+            <ul class="user_info_list">
+              <li id="create_time"><span>注册时间：</span></li>
+              <li><span>商铺信誉：</span>4.8</li>
+              <li><span>服务态度：</span>4.6</li>
+              <li><span>描述相符：</span>4.7</li>
+              <li><span>物流服务：</span>4.7</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 
-					<ul class="user_info_list ">
-						<li id="create_time"><span>注册时间：</span></li>
-						<li><span>商铺信誉：</span>4.8</li>
-						<li><span>服务态度：</span>4.6</li>
-						<li><span>描述相符：</span>4.7</li>
-						<li><span>物流服务：</span>4.7</li>
-					</ul>
-
-				</div>
-			</div>
-
-
-		</div>
-
-	</div>
-
-
-
-
-	<div class="footer">
-		<div class="foot_link">
-			<a href="#">关于我们</a>
-			<span>|</span>
-			<a href="#">联系我们</a>
-			<span>|</span>
-			<a href="#">招聘人才</a>
-			<span>|</span>
-			<a href="#">友情链接</a>
-		</div>
-		<p>CopyRight © 2016 北京QUALITY HOME信息技术有限公司 All Rights Reserved</p>
-		<p>电话：010-****888    京ICP备*******8号</p>
-	</div>
-
-	<script type="text/javascript" src="assets/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="assets/store_center_info.js"></script>
-</body>
+    <div class="footer">
+      <div class="foot_link">
+        <a href="#">关于我们</a>
+        <span>|</span>
+        <a href="#">联系我们</a>
+        <span>|</span>
+        <a href="#">招聘人才</a>
+        <span>|</span>
+        <a href="#">友情链接</a>
+      </div>
+      <p>
+        CopyRight © 2016 北京QUALITY HOME信息技术有限公司 All Rights Reserved
+      </p>
+      <p>电话：010-****888 京ICP备*******8号</p>
+    </div>
+  </body>
 </html>
