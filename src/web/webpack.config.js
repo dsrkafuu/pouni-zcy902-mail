@@ -1,20 +1,73 @@
 const path = require('path');
 const glob = require('glob');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const mode =
-  process.env.NODE_ENV === 'development' ? 'development' : 'production';
-const jsEntrys = glob.sync('./src/js/*.js');
+const jsInputs = glob.sync('./src/js/*.js');
+jsInputs.push('./src/css/styles.js');
+const jsEntrys = {};
+jsInputs.forEach((entry) => {
+  const basename = path.basename(entry, '.js');
+  jsEntrys[basename] = { import: entry, filename: `assets/${basename}.js` };
+});
+
+const htmlInputs = glob.sync('./src/*.html');
+const htmlPlugins = [];
+htmlInputs.forEach((input) => {
+  const basename = path.basename(input, '.html');
+  htmlPlugins.push(
+    new HtmlWebpackPlugin({
+      template: input,
+      filename: `${basename}.html`,
+      inject: false,
+    })
+  );
+});
 
 module.exports = {
-  mode,
-  entry: jsEntrys,
+  mode: 'development',
+  entry: { ...jsEntrys },
+  devtool: 'source-map',
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, '../main/resources/static'),
   },
-  plugins: [],
+  externals: {
+    jquery: 'jQuery',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.s?css$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { url: false } },
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({ filename: 'assets/main.css' }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: './public',
+          to: path.resolve(__dirname, '../main/resources/static'),
+        },
+      ],
+    }),
+    ...htmlPlugins,
+  ],
   devServer: {
     port: 3000,
+    hot: false,
+    liveReload: false,
+    watchFiles: ['src/**/*'],
+    proxy: {
+      '**': 'http://localhost:8085',
+    },
   },
 };

@@ -1,65 +1,88 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<title>QUALITY HOME-登录</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="js/ajax-config.js"></script>
-	<script type="text/javascript" src="js/login.js"></script>
-</head>
-<body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>QUALITY HOME-登录</title>
+    <script src="library/jquery-1.12.4.min.js"></script>
+    <script src="library/jquery-ui.min.js"></script>
+    <script src="library/jquery.cookie-1.4.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/main.css" />
+    <script type="text/javascript" src="assets/ajax-config.js"></script>
+    <script type="text/javascript" src="assets/login.js"></script>
+  <script defer src="assets/ajax-config.js"></script><script defer src="assets/cart-order.js"></script><script defer src="assets/cart.js"></script><script defer src="assets/center-order.js"></script><script defer src="assets/detail.js"></script><script defer src="assets/disable-refresh.js"></script><script defer src="assets/findpwd.js"></script><script defer src="assets/head.js"></script><script defer src="assets/img_add.js"></script><script defer src="assets/index.js"></script><script defer src="assets/item-order.js"></script><script defer src="assets/list.js"></script><script defer src="assets/login-e.js"></script><script defer src="assets/login.js"></script><script defer src="assets/my-cart.js"></script><script defer src="assets/new.js"></script><script defer src="assets/register-e.js"></script><script defer src="assets/register.js"></script><script defer src="assets/reset.js"></script><script defer src="assets/search-btn.js"></script><script defer src="assets/search.js"></script><script defer src="assets/slide.js"></script><script defer src="assets/store_add_item.js"></script><script defer src="assets/store_center_all.js"></script><script defer src="assets/store_center_info.js"></script><script defer src="assets/store_center_manage.js"></script><script defer src="assets/user_center_info.js"></script><script defer src="assets/user_center_order.js"></script><script defer src="assets/user_center_site.js"></script><script defer src="assets/user_info_update.js"></script><script defer src="assets/styles.js"></script><link href="assets/main.css" rel="stylesheet"></head>
+  <body>
+    <div class="login_form_bg">
+      <div class="login_form_wrap clearfix">
+        <div class="login_banner fl">
+          <a href="index.html" class="fl"
+            ><img src="images/logo.png" width="380px" height="380px"
+          /></a>
+        </div>
+        <div class="slogan fl">精选家居 · 急速送达</div>
+        <div class="login_form fr">
+          <div class="login_title clearfix">
+            <h1>用户登录</h1>
+            <a href="register.html">立即注册</a>
+          </div>
+          <div class="form_input">
+            <form>
+              <ul>
+                <li>
+                  <input
+                    type="text"
+                    name="username"
+                    class="name_input"
+                    placeholder="国内手机号/邮箱"
+                    id="user_account"
+                  />
+                  <div class="user_error">手机号/邮箱不能为空</div>
+                </li>
+                <li>
+                  <input
+                    type="password"
+                    name="pwd"
+                    class="pass_input"
+                    placeholder="请输入密码"
+                    id="user_password"
+                  />
+                  <div class="pwd_error">密码不能为空</div>
+                </li>
 
-	<div class="login_form_bg">
-		<div class="login_form_wrap clearfix">
-			<div class="login_banner fl">
-				<a href="index.html" class="fl"><img src="images/logo.png" width="380px" height="380px"></a>
-			</div>
-			<div class="slogan fl">精选家居 · 急速送达</div>
-			<div class="login_form fr">
-				<div class="login_title clearfix">
-					<h1>用户登录</h1>
-					<a href="register.html" >立即注册</a>
-				</div>
-				<div class="form_input">
-					<form>
-						<ul>
-							<li>
-								<input type="text" name="username" class="name_input" placeholder="国内手机号/邮箱" id="user_account">
-								<div class="user_error">手机号/邮箱不能为空</div>
-							</li>
-							<li>
-								<input type="password" name="pwd" class="pass_input" placeholder="请输入密码" id="user_password">
-								<div class="pwd_error">密码不能为空</div>
-							</li>
+                <div class="more_input clearfix">
+                  <input type="checkbox" name="" />
+                  <label>记住用户名</label>
+                  <a href="findpwd.html">忘记密码</a>
+                </div>
+                <button
+                  type="button"
+                  value="登录"
+                  class="input_submit"
+                  id="login_btn"
+                >
+                  登录
+                </button>
+              </ul>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-							<div class="more_input clearfix">
-								<input type="checkbox" name="">
-								<label>记住用户名</label>
-								<a href="findpwd.html">忘记密码</a>
-							</div>
-							<button type="button" value="登录" class="input_submit" id="login_btn">登录</button>
-						</ul>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="footer no-mp">
-		<div class="foot_link">
-			<a href="#">关于我们</a>
-			<span>|</span>
-			<a href="#">联系我们</a>
-			<span>|</span>
-			<a href="#">招聘人才</a>
-			<span>|</span>
-			<a href="#">友情链接</a>		
-		</div>
-		<p>CopyRight © 2016 北京QUALITY HOMEHOME信息技术有限公司 All Rights Reserved</p>
-		<p>电话：010-****888    京ICP备*******8号</p>
-	</div>
-	
-</body>
+    <div class="footer no-mp">
+      <div class="foot_link">
+        <a href="#">关于我们</a>
+        <span>|</span>
+        <a href="#">联系我们</a>
+        <span>|</span>
+        <a href="#">招聘人才</a>
+        <span>|</span>
+        <a href="#">友情链接</a>
+      </div>
+      <p>
+        CopyRight © 2016 北京QUALITY HOMEHOME信息技术有限公司 All Rights
+        Reserved
+      </p>
+      <p>电话：010-****888 京ICP备*******8号</p>
+    </div>
+  </body>
 </html>

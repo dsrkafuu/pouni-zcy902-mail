@@ -1,1 +1,1 @@
-const host = "http://localhost:8085";
+window.host = 'http://localhost:8085';
