@@ -24,6 +24,6 @@ function reloadCartNum(n) {
   $('.goods_count').show();
 }
 
-$(() => {
+$(function (){
   getCartNum();
 });

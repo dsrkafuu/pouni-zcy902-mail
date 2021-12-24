@@ -99,7 +99,7 @@ function reloadOrderList() {
     }
     $('#amount').html(amount);
     $('.total').html(total.toFixed(2) + '元');
-    $('#order_btn').on('click', () => {
+    $('#order_btn'). on('click', function () {
       let error_complete = false;
       let paymentMethod = $('input[name="pay_style"]:checked').val();
       let addressId = $('input[name="address"]:checked').val();
@@ -136,7 +136,7 @@ function reloadOrderList() {
   }
 }
 
-$(() => {
+$(function (){
   $.ajax({
     type: 'GET',
     url: '/address/list',

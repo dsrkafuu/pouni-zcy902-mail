@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   var new_itemList = [];
   $.ajax({
     type: 'GET',
@@ -32,7 +32,7 @@ function reloadNewItem(list_data) {
     $('#goods_title_' + i).text(new_itemVO.title);
     $('#goods_img_' + i).attr('src', new_itemVO.imgUrl);
     $('#goods_price_' + i).text('￥ ' + new_itemVO.price.toFixed(2));
-    $('#itemDetail' + new_itemVO.id).on('click', () => {
+    $('#itemDetail' + new_itemVO.id). on('click', function () {
       window.location.href = '/detail.html?id=' + $(this).data('id');
     });
   }

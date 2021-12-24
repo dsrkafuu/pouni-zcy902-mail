@@ -1,18 +1,18 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   var error_telphone = false;
   var error_check = false;
 
-  $('#tel').blur(() => {
+  $('#tel').blur(function (){
     check_telphone();
   });
 
-  $('#check').blur(() => {
+  $('#check').blur(function (){
     check_check();
   });
 
-  $('#get_otpCode').on('click', () => {
+  $('#get_otpCode'). on('click', function () {
     check_telphone();
     if (error_telphone == false) {
       var telphone = $('#tel').val();
@@ -38,7 +38,7 @@ $(() => {
     }
   });
 
-  $('#findpwd_sub').on('click', () => {
+  $('#findpwd_sub'). on('click', function () {
     check_telphone();
     check_check();
 

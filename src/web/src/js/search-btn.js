@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
-$(() => {
-  $('.input_btn').on('click', () => {
+$(function (){
+  $('.input_btn'). on('click', function () {
     var keyword = $('#search').val();
     if (keyword == null || keyword == '') {
       alert('关键词不能为空');

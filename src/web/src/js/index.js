@@ -3,7 +3,7 @@ import $ from 'jquery';
 //定义全局商品数组信息
 
 const list_title = ['卧室', '餐厅', '客厅', '书房', '墙纸', '家装风格'];
-$(() => {
+$(function (){
   getData(1);
   reloadButton();
 });
@@ -24,7 +24,7 @@ function reloadItem(floor, list_data) {
       .parent('a')
       .attr('href', 'detail.html?id=' + itemVO.id);
     $('#goods_price_f' + floor + '_' + i).text('￥ ' + itemVO.price.toFixed(2));
-    $('#itemDetail' + itemVO.id).on('click', () => {
+    $('#itemDetail' + itemVO.id). on('click', function () {
       window.location.href = '/detail.html?id=' + $(this).data('id');
     });
   }
@@ -71,7 +71,7 @@ function reloadButton() {
     $('#get_more_' + i).attr({
       'data-id': i,
     });
-    $('#get_more_' + i).on('click', () => {
+    $('#get_more_' + i). on('click', function () {
       window.location.href = '/list.html?sort=' + $(this).data('id');
     });
   }

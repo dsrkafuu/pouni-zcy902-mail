@@ -9,7 +9,7 @@ function GetQueryString(name) {
   return null;
 }
 
-$(() => {
+$(function (){
   let id = GetQueryString('id');
   let itemVO = [];
   let orderVO = [];
@@ -137,7 +137,7 @@ $(() => {
       $('#order_list').append(htmlContent);
       $('#amount').html(amount);
       $('.total').html(total.toFixed(2) + '元');
-      $('#order_btn').on('click', () => {
+      $('#order_btn'). on('click', function () {
         var paymentMethod = $('input[name="pay_style"]:checked').val();
         var addressId = $('input[name="address"]:checked').val();
         $.ajax({

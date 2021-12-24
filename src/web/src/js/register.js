@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   var error_name = false;
   var error_telphone = false;
   var error_password = false;
@@ -9,35 +9,35 @@ $(() => {
   var error_check = false;
   var error_age = false;
 
-  $('#user_name').blur(() => {
+  $('#user_name').blur(function (){
     check_user_name();
   });
 
-  $('#tel').blur(() => {
+  $('#tel').blur(function (){
     check_telphone();
   });
 
-  $('#pwd').blur(() => {
+  $('#pwd').blur(function (){
     check_pwd();
   });
 
-  $('#cpwd').blur(() => {
+  $('#cpwd').blur(function (){
     check_cpwd();
   });
 
-  $('#email').blur(() => {
+  $('#email').blur(function (){
     check_email();
   });
 
-  $('#age').blur(() => {
+  $('#age').blur(function (){
     check_age();
   });
 
-  $('#check').blur(() => {
+  $('#check').blur(function (){
     check_check();
   });
 
-  $('#allow').click(() => {
+  $('#allow').click(function (){
     if ($(this).is(':checked')) {
       error_check = false;
       $(this).siblings('span').hide();
@@ -135,7 +135,7 @@ $(() => {
     }
   }
 
-  $('#get_otpCode').on('click', () => {
+  $('#get_otpCode'). on('click', function () {
     check_telphone();
     if (error_telphone == false) {
       var telphone = $('#tel').val();
@@ -163,7 +163,7 @@ $(() => {
     }
   });
 
-  $('#register_sub').on('click', () => {
+  $('#register_sub'). on('click', function () {
     check_user_name();
     check_telphone();
     check_pwd();

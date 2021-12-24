@@ -25,16 +25,16 @@ function check_password() {
   }
 }
 
-$(() => {
-  $('#user_account').blur(() => {
+$(function (){
+  $('#user_account').blur(function (){
     check_account();
   });
 
-  $('#user_password').blur(() => {
+  $('#user_password').blur(function (){
     check_password();
   });
 
-  $('#login_btn').on('click', () => {
+  $('#login_btn'). on('click', function () {
     check_account();
     check_password();
     if (emptyAccount == false && emptyPassword == false) {

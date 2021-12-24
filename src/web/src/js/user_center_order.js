@@ -1,20 +1,20 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   var now_page = 1;
   var max_page = 1;
   var order_list = [];
   getMaxPage();
   getOrderList();
 
-  $('#pg_dn').on('click', () => {
+  $('#pg_dn'). on('click', function () {
     if (now_page < max_page) {
       now_page++;
       getOrderList();
       reloadActivePage();
     }
   });
-  $('#pg_up').on('click', () => {
+  $('#pg_up'). on('click', function () {
     if (now_page > 1) {
       now_page--;
       getOrderList();
@@ -22,7 +22,7 @@ $(() => {
     }
   });
 
-  $('#logout').on('click', () => {
+  $('#logout'). on('click', function () {
     $.ajax({
       type: 'GET',
       url: '/user/logout',
@@ -172,11 +172,11 @@ $(() => {
           });
           $('#send_msg_' + i).hide();
           $('#get_logistics_' + i).hide();
-          $('#pay_btn_' + i).on('click', () => {
+          $('#pay_btn_' + i). on('click', function () {
             var id = $(this).data('id');
             window.location.href = '/center-order.html?id=' + id;
           });
-          $('#cancel_btn_' + i).on('click', () => {
+          $('#cancel_btn_' + i). on('click', function () {
             var id = $(this).data('id');
             $.ajax({
               type: 'POST',

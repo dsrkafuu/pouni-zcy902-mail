@@ -52,6 +52,7 @@ function checkCart(id) {
   if (id == null) {
     return;
   }
+  console.log(1);
   let cart_total_price = parseFloat($('#cart_total').html());
   cart_total_price += parseFloat($('#totalPrice_' + id).html());
   $('#cart_total').html(cart_total_price.toFixed(2));
@@ -76,7 +77,7 @@ function uncheckCart(id) {
 
 function isAllChecked() {
   let is_all_checked = true;
-  $('input:checkbox').each(() => {
+  $('input:checkbox').each(function () {
     if (!$(this).is($('#select_all'))) {
       if (!$(this).is(':checked')) {
         is_all_checked = false;
@@ -166,7 +167,7 @@ function reloadCartList(cart_list) {
 
     $('#cart_list').append(htmlContent);
 
-    $('#check_' + cartVO.id).on('click', () => {
+    $('#check_' + cartVO.id).on('click', function () {
       const id = $(this).data('id');
       if ($(this).is(':checked')) {
         checkCart(id);
@@ -175,7 +176,7 @@ function reloadCartList(cart_list) {
       }
     });
 
-    $('#add_' + cartVO.id).on('click', () => {
+    $('#add_' + cartVO.id).on('click', function () {
       const id = $(this).data('id');
       const past_amount = parseInt($('#amount_' + id).val());
       if (past_amount < 99) {
@@ -209,7 +210,7 @@ function reloadCartList(cart_list) {
       }
     });
 
-    $('#minus_' + cartVO.id).on('click', () => {
+    $('#minus_' + cartVO.id).on('click', function () {
       const id = $(this).data('id');
       const past_amount = parseInt($('#amount_' + id).val());
 
@@ -244,7 +245,7 @@ function reloadCartList(cart_list) {
       }
     });
 
-    $('#delete_' + cartVO.id).on('click', () => {
+    $('#delete_' + cartVO.id).on('click', function () {
       const id = $(this).data('id');
       $.ajax({
         type: 'POST',
@@ -271,19 +272,19 @@ function reloadCartList(cart_list) {
   $('#cart_list').find('*').trigger('create');
 }
 
-$(() => {
+$(function () {
   getCartList();
 
-  $('#select_all').on('click', () => {
+  $('#select_all').on('click', function () {
     if ($(this).is(':checked')) {
-      $('input:checkbox').each(() => {
+      $('input:checkbox').each(function () {
         if (!$(this).is(':checked')) {
           $(this).prop('checked', true);
           checkCart($(this).data('id'));
         }
       });
     } else {
-      $('input:checkbox').each(() => {
+      $('input:checkbox').each(function () {
         if ($(this).is(':checked')) {
           $(this).prop('checked', false);
           uncheckCart($(this).data('id'));
@@ -292,9 +293,9 @@ $(() => {
     }
   });
 
-  $('#settle').on('click', () => {
+  $('#settle').on('click', function () {
     let id_build = '';
-    $('input:checkbox').each(() => {
+    $('input:checkbox').each(function () {
       if (!$(this).is($('#select_all'))) {
         if ($(this).is(':checked')) {
           const id = $(this).data('id');

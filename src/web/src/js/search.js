@@ -58,7 +58,7 @@ function reloadItem(itemList) {
     $('#item_' + i)
       .find('span.unit')
       .html('/一件');
-    $('#item_' + i).on('click', () => {
+    $('#item_' + i). on('click', function () {
       window.location.href = '/detail.html?id=' + $(this).data('id');
     });
   }
@@ -136,18 +136,18 @@ function getItemList() {
   });
 }
 
-$(() => {
+$(function (){
   $('#search_title').html('搜索：' + GetQueryString('keyword'));
   getMaxPage();
   getItemList();
-  $('#pg_dn').on('click', () => {
+  $('#pg_dn'). on('click', function () {
     if (now_page < max_page) {
       now_page++;
       getItemList();
       reloadActivePage();
     }
   });
-  $('#pg_up').on('click', () => {
+  $('#pg_up'). on('click', function () {
     if (now_page > 1) {
       now_page--;
       getItemList();

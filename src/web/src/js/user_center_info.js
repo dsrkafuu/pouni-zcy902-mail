@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   var userVO = [];
   function reloadUserInfo() {
     $('#name').html('<span>用户名：</span>' + userVO.name);
@@ -31,7 +31,7 @@ $(() => {
     },
   });
 
-  $('#logout').on('click', () => {
+  $('#logout'). on('click', function () {
     $.ajax({
       type: 'GET',
       url: '/user/logout',

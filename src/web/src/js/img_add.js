@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
-$(() => {
-  $('#file').change(() => {
+$(function (){
+  $('#file').change(function (){
     var images = $('#file')[0].files;
     if (images.length == 0) {
       alert('请选择图片上传');
@@ -29,7 +29,7 @@ $(() => {
         //加载图片获取图片真实宽度和高度
         var image = new Image();
         image.src = data;
-        image.onload = () => {
+        image.onload = function (){
           var width = image.width;
           var height = image.height;
           if (width <= 500 && height <= 500) {

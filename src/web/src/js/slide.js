@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   var $slides = $('.slide_pics li');
   var len = $slides.length;
   var nowli = 0;
@@ -22,11 +22,11 @@ $(() => {
   });
   timer = setInterval(autoplay, 4000);
 
-  $('.slide').mouseenter(() => {
+  $('.slide').mouseenter(function (){
     clearInterval(timer);
   });
 
-  $('.slide').mouseleave(() => {
+  $('.slide').mouseleave(function (){
     timer = setInterval(autoplay, 4000);
   });
 
@@ -50,7 +50,7 @@ $(() => {
     move();
   });
 
-  $prev.click(() => {
+  $prev.click(function (){
     if (ismove) {
       return;
     }
@@ -59,7 +59,7 @@ $(() => {
     $points.eq(nowli).addClass('active').siblings().removeClass('active');
   });
 
-  $next.click(() => {
+  $next.click(function (){
     if (ismove) {
       return;
     }
@@ -76,7 +76,7 @@ $(() => {
       prevli = 0;
       $slides.eq(nowli).css({ left: -760 });
       $slides.eq(nowli).animate({ left: 0 }, 800, 'easeOutExpo');
-      $slides.eq(prevli).animate({ left: 760 }, 800, 'easeOutExpo', () => {
+      $slides.eq(prevli).animate({ left: 760 }, 800, 'easeOutExpo', function (){
         ismove = false;
       });
       prevli = nowli;
@@ -88,7 +88,7 @@ $(() => {
       prevli = len - 1;
       $slides.eq(nowli).css({ left: 760 });
       $slides.eq(nowli).animate({ left: 0 }, 800, 'easeOutExpo');
-      $slides.eq(prevli).animate({ left: -760 }, 800, 'easeOutExpo', () => {
+      $slides.eq(prevli).animate({ left: -760 }, 800, 'easeOutExpo', function (){
         ismove = false;
       });
       prevli = nowli;
@@ -98,14 +98,14 @@ $(() => {
     if (prevli < nowli) {
       $slides.eq(nowli).css({ left: 760 });
       $slides.eq(prevli).animate({ left: -760 }, 800, 'easeOutExpo');
-      $slides.eq(nowli).animate({ left: 0 }, 800, 'easeOutExpo', () => {
+      $slides.eq(nowli).animate({ left: 0 }, 800, 'easeOutExpo', function (){
         ismove = false;
       });
       prevli = nowli;
     } else {
       $slides.eq(nowli).css({ left: -760 });
       $slides.eq(prevli).animate({ left: 760 }, 800, 'easeOutExpo');
-      $slides.eq(nowli).animate({ left: 0 }, 800, 'easeOutExpo', () => {
+      $slides.eq(nowli).animate({ left: 0 }, 800, 'easeOutExpo', function (){
         ismove = false;
       });
       prevli = nowli;

@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   var userVO = [];
   function reloadUserInfo() {
     $('#name').val(userVO.name);
@@ -25,7 +25,7 @@ $(() => {
       alert('获取用户信息失败，原因是' + data.responseText);
     },
   });
-  $('#update').on('click', () => {
+  $('#update'). on('click', function () {
     var name = $('#name').val();
     var email = $('#email').val();
     var age = $('#age').val();
@@ -64,7 +64,7 @@ $(() => {
       });
     }
   });
-  $('#logout').on('click', () => {
+  $('#logout'). on('click', function () {
     $.ajax({
       type: 'GET',
       url: '/user/logout',

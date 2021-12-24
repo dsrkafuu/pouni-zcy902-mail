@@ -1,20 +1,20 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   var now_page = 1;
   var max_page = 1;
   var logistics_list = [];
   getMaxPage();
   getLogisticsList();
 
-  $('#pg_dn').on('click', () => {
+  $('#pg_dn'). on('click', function () {
     if (now_page < max_page) {
       now_page++;
       getLogisticsList();
       reloadActivePage();
     }
   });
-  $('#pg_up').on('click', () => {
+  $('#pg_up'). on('click', function () {
     if (now_page > 1) {
       now_page--;
       getLogisticsList();
@@ -159,11 +159,11 @@ $(() => {
             'data-i': i,
           });
           $('#get_logistics_' + i).hide();
-          $('#write_info_' + i).on('click', () => {
+          $('#write_info_' + i). on('click', function () {
             $(this).hide();
             var i = $(this).data('i');
             $(this).next().show();
-            $('#sub_info_' + i).on('click', () => {
+            $('#sub_info_' + i). on('click', function () {
               var id = $(this).data('id');
               var i = $(this).data('i');
               var company = $('#company_' + i).val();

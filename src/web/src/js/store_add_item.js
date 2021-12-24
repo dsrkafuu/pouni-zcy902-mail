@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
-$(() => {
-  $('.info_submit').on('click', () => {
+$(function (){
+  $('.info_submit'). on('click', function () {
     var title = $('#title').val();
     var description = $('#description').val();
     var sort = $('#sort option:selected').val();

@@ -1,14 +1,14 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   var error_password = false;
   var error_check_password = false;
 
-  $('#pwd').blur(() => {
+  $('#pwd').blur(function (){
     check_pwd();
   });
 
-  $('#cpwd').blur(() => {
+  $('#cpwd').blur(function (){
     check_cpwd();
   });
   function check_pwd() {
@@ -37,7 +37,7 @@ $(() => {
     }
   }
 
-  $('#reset_sub').on('click', () => {
+  $('#reset_sub'). on('click', function () {
     check_pwd();
     check_cpwd();
 

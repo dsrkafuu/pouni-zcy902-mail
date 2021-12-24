@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   function GetQueryString(name) {
     var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
     var r = window.location.search.substr(1).match(reg);
@@ -134,7 +134,7 @@ $(() => {
       $('#order_list').append(htmlContent);
       $('#amount').html(amount);
       $('.total').html(total.toFixed(2) + '元');
-      $('#order_btn').on('click', () => {
+      $('#order_btn'). on('click', function () {
         var paymentMethod = $('input[name="pay_style"]:checked').val();
         var addressId = $('input[name="address"]:checked').val();
         $.ajax({

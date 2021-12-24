@@ -35,16 +35,16 @@ function judge_is_email() {
   }
 }
 
-$(() => {
-  $('#user_account').blur(() => {
+$(function (){
+  $('#user_account').blur(function (){
     check_account($(this).val());
   });
 
-  $('#user_password').blur(() => {
+  $('#user_password').blur(function (){
     check_password($(this).val());
   });
 
-  $('#login_btn').on('click', () => {
+  $('#login_btn'). on('click', function () {
     check_account();
     check_password();
     judge_is_email();

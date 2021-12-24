@@ -23,7 +23,7 @@ function addAnimation($add_x, $add_y, $to_x, $to_y) {
         top: $to_x + 7,
       },
       'fast',
-      () => {
+      function (){
         $('.add_jump').fadeOut('fast');
       }
     );
@@ -63,14 +63,14 @@ function reloadStoreItems() {
         .find('span.unit')
         .html('/一件');
       $('#item_' + i).attr('data-id', itemVO.id);
-      $('#item_' + i).on('click', () => {
+      $('#item_' + i). on('click', function () {
         window.location.href = '/detail.html?id=' + $(this).data('id');
       });
     }
   }
 }
 
-$(() => {
+$(function (){
   //获取商品详情
   $.ajax({
     type: 'GET',
@@ -93,7 +93,7 @@ $(() => {
     },
   });
 
-  $('#add_amount').on('click', () => {
+  $('#add_amount'). on('click', function () {
     var amount = parseInt($('#amount').val());
     var price = parseFloat($('#price').text());
     amount++;
@@ -102,7 +102,7 @@ $(() => {
     $('#total_price').text(totalPrice.toFixed(2) + '元');
   });
 
-  $('#minus_amount').on('click', () => {
+  $('#minus_amount'). on('click', function () {
     var amount = parseInt($('#amount').val());
     var price = parseFloat($('#price').text());
     if (amount == 1) {
@@ -116,13 +116,13 @@ $(() => {
     }
   });
 
-  $('#buy_now').on('click', () => {
+  $('#buy_now'). on('click', function () {
     var amount = parseInt($('#amount').val());
     window.location.href =
       '/item-order.html?amount=' + amount + '&itemId=' + g_itemVO.id;
   });
 
-  $('#add_cart').on('click', () => {
+  $('#add_cart'). on('click', function () {
     var $add_x = $('#add_cart').offset().top;
     var $add_y = $('#add_cart').offset().left;
 
@@ -155,7 +155,7 @@ $(() => {
     });
   });
 
-  $('#get_items').on('click', () => {
+  $('#get_items'). on('click', function () {
     if ($('.detail_tab').children('li.active').html() == '商品介绍') {
       $('#get_items').addClass('active');
       $('#get_detail').removeClass('active');
@@ -185,7 +185,7 @@ $(() => {
       });
     }
   });
-  $('#get_detail').on('click', () => {
+  $('#get_detail'). on('click', function () {
     if ($('.detail_tab').children('li.active').html() == '本店精选') {
       $('#get_detail').addClass('active');
       $('#get_items').removeClass('active');

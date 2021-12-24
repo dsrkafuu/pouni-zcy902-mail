@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   var address_list = [];
   function reloadAddressList() {
     if (address_list != null) {
@@ -25,7 +25,7 @@ $(() => {
         htmlContent += '>设为默认 </dd>';
         $('#address_list').append(htmlContent);
         if (addressVO.status == 2) {
-          $('#address_' + addressVO.id).on('click', () => {
+          $('#address_' + addressVO.id). on('click', function () {
             var id = $(this).val();
             $.ajax({
               type: 'POST',
@@ -69,7 +69,7 @@ $(() => {
     },
   });
 
-  $('#sub_bnt').on('click', () => {
+  $('#sub_bnt'). on('click', function () {
     var name = $('#name').val();
     var address = $('#address').val();
     var postcode = $('#postcode').val();
@@ -109,7 +109,7 @@ $(() => {
     }
   });
 
-  $('#logout').on('click', () => {
+  $('#logout'). on('click', function () {
     $.ajax({
       type: 'GET',
       url: '/user/logout',

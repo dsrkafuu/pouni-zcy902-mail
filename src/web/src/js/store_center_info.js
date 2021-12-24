@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-$(() => {
+$(function (){
   var storeVO = [];
   function reloadSoreInfo() {
     var htmlContent = '';
