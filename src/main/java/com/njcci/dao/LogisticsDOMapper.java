@@ -19,6 +19,8 @@ public interface LogisticsDOMapper {
 
     int getCountByStoreName(String storeName);
 
+    String getOrderIdById(String id);
+
     int updateByPrimaryKeySelective(LogisticsDO record);
 
     int updateByPrimaryKey(LogisticsDO record);

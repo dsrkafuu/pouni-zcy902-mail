@@ -24,4 +24,6 @@ public interface OrderDOMapper {
     int updateByPrimaryKey(OrderDO record);
 
     int cancelOrder(String id);
+
+    void changeStatus(String id);
 }

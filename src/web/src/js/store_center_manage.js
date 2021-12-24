@@ -147,7 +147,7 @@ $(function (){
         $('#telphone_' + i).html(addressVO.encrptTelphone);
         $('#address_' + i).html(addressVO.address);
 
-        if (orderVO.status == 2) {
+        if (orderVO.status === 2) {
           //$('#order_status_' + i).html('待发货');
           $('#status_' + i).html('待发货');
           $('#write_info_' + i).show();
@@ -199,7 +199,7 @@ $(function (){
               }
             });
           });
-        } else {
+        } else if(orderVO.status === 4){
 
           $('#status_' + i).html('运输中');
           $('#get_logistics_' + i).show();

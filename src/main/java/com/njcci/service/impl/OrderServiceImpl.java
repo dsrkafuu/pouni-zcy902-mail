@@ -214,6 +214,7 @@ public class OrderServiceImpl implements OrderService {
 
     public LogisticsModel completeLogistics(String id, String deliveryCompany, String deliveryNumber, String storeName) {
         LogisticsDO logisticsDO = this.logisticsDOMapper.selectByPrimaryKey(id);
+        String orderId = this.logisticsDOMapper.getOrderIdById(id);
         if (logisticsDO == null) {
             throw new BusinessException(EmBusinessError.LOGISTICS_NOT_EXIST);
         } else {
@@ -223,6 +224,8 @@ public class OrderServiceImpl implements OrderService {
                 throw new BusinessException(EmBusinessError.LOGISTICS_STATUS_ERROR);
             } else {
                 logisticsDO.setStatus(2);
+                this.orderDOMapper.changeStatus(orderId);
+                System.out.println(orderId);
                 this.logisticsDOMapper.updateByPrimaryKeySelective(logisticsDO);
                 LogisticsModel logisticsModel = this.convertFromDataObject(logisticsDO);
                 return logisticsModel;
