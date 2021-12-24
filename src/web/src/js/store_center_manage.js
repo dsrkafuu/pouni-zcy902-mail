@@ -132,7 +132,8 @@ $(function (){
           new Date(logisticsVO.createTime).format('yyyy-MM-dd hh:mm:ss')
         );
         $('#order_id_' + i).html('订单号：' + logisticsVO.orderId);
-        if (logisticsVO.status == 1) {
+        console.log(orderVO)
+        if (orderVO.status == 2) {
           $('#order_status_' + i).html('未发货');
         } else {
           $('#order_status_' + i).html('已发货');
@@ -146,8 +147,9 @@ $(function (){
         $('#telphone_' + i).html(addressVO.encrptTelphone);
         $('#address_' + i).html(addressVO.address);
 
-        if (logisticsVO.status == 1) {
-          $('#order_status_' + i).html('待发货');
+        if (orderVO.status == 2) {
+          //$('#order_status_' + i).html('待发货');
+          $('#status_' + i).html('待发货');
           $('#write_info_' + i).show();
           $('#send_list_' + i).hide();
           $('#write_info_' + i).attr({
@@ -198,6 +200,7 @@ $(function (){
             });
           });
         } else {
+
           $('#status_' + i).html('运输中');
           $('#get_logistics_' + i).show();
           $('#write_info_' + i).hide();
@@ -243,6 +246,7 @@ $(function (){
       xhrFields: { withCredentials: true },
       success(data) {
         if (data.status == 'success') {
+          console.log(data)
           orderVO = data.data;
         } else {
           alert('获取订单信息失败，原因是' + data.data.errMsg);

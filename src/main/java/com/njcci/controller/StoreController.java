@@ -101,6 +101,7 @@ public class StoreController extends BaseController {
         if (isStoreLogin != null && isStoreLogin) {
             StoreModel storeModel = (StoreModel)this.httpServletRequest.getSession().getAttribute("LOGIN_STORE");
             List<LogisticsModel> logisticsModelList = this.orderService.getLogistics(storeModel.getStoreName(), page);
+            //System.out.println(storeModel.);
             return CommonReturnType.create(logisticsModelList);
         } else {
             throw new BusinessException(EmBusinessError.STORE_NOT_LOGIN, "商铺登录信息失效");
