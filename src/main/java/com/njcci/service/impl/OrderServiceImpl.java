@@ -5,34 +5,32 @@
 
 package com.njcci.service.impl;
 
+import com.njcci.dao.ItemDOMapper;
 import com.njcci.dao.LogisticsDOMapper;
 import com.njcci.dao.OrderDOMapper;
 import com.njcci.dao.SequenceDOMapper;
+import com.njcci.dataobject.LogisticsDO;
+import com.njcci.dataobject.OrderDO;
+import com.njcci.dataobject.SequenceDO;
 import com.njcci.error.BusinessException;
 import com.njcci.error.EmBusinessError;
 import com.njcci.service.CartService;
 import com.njcci.service.ItemService;
 import com.njcci.service.OrderService;
 import com.njcci.service.UserService;
-import com.njcci.dataobject.LogisticsDO;
-import com.njcci.dataobject.OrderDO;
-import com.njcci.dataobject.SequenceDO;
-import com.njcci.service.model.CartModel;
-import com.njcci.service.model.ItemModel;
-import com.njcci.service.model.LogisticsModel;
-import com.njcci.service.model.OrderModel;
-import com.njcci.service.model.UserModel;
+import com.njcci.service.model.*;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -48,6 +46,8 @@ public class OrderServiceImpl implements OrderService {
     private CartService cartService;
     @Autowired
     private LogisticsDOMapper logisticsDOMapper;
+    @Autowired
+    private ItemDOMapper itemDOMapper;
 
     public OrderServiceImpl() {
     }
@@ -131,6 +131,18 @@ public class OrderServiceImpl implements OrderService {
 
     public List<OrderModel> getOrders(Integer userId, Integer page) {
         List<OrderDO> orderDOList = this.orderDOMapper.selectByUserId(userId, (page - 1) * 3);
+        List<OrderModel> orderModelList = (List)orderDOList.stream().map((orderDO) -> {
+            OrderModel orderModel = this.convertFromDataObject(orderDO);
+            return orderModel;
+        }).collect(Collectors.toList());
+        return orderModelList;
+    }
+
+    public List<OrderModel> getOrderByTitle(Integer userId, Integer page, String title) {
+        Integer item_id = this.itemDOMapper.getItemByTitle(title);
+        List<OrderDO> orderDOList = this.orderDOMapper.selectByUserId(userId, (page - 1) * 3);
+        System.out.println(3);
+        //List<OrderDO> orderDOList = this.orderDOMapper.selectByUserIdAndItemId(userId, (page - 1) * 3, item_id);
         List<OrderModel> orderModelList = (List)orderDOList.stream().map((orderDO) -> {
             OrderModel orderModel = this.convertFromDataObject(orderDO);
             return orderModel;

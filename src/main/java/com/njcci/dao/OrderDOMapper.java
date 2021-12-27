@@ -2,8 +2,9 @@
 package com.njcci.dao;
 
 import com.njcci.dataobject.OrderDO;
-import java.util.List;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface OrderDOMapper {
@@ -17,6 +18,8 @@ public interface OrderDOMapper {
 
     List<OrderDO> selectByUserId(Integer userId, Integer offset);
 
+    List<OrderDO> selectByUserIdAndItemId(Integer userId, Integer offset, Integer itemId);
+
     int getCountByUserId(Integer userId);
 
     int updateByPrimaryKeySelective(OrderDO record);
@@ -26,4 +29,5 @@ public interface OrderDOMapper {
     int cancelOrder(String id);
 
     void changeStatus(String id);
+
 }

@@ -103,6 +103,12 @@
     where title like #{keyWord,jdbcType=VARCHAR} or description like #{keyWord,jdbcType=VARCHAR}
   </select>
 
+<!--  <select id="getItemByTitle" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select id
+    <include refid="Base_Column_List" />
+    from item
+    where title = #{title,jdbcType="VARCHAR"}
+  </select>-->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated

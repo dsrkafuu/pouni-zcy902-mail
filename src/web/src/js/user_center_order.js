@@ -4,6 +4,7 @@ $(function (){
   var now_page = 1;
   var max_page = 1;
   var order_list = [];
+  var key = "abc";
   getMaxPage();
   getOrderList();
 
@@ -42,6 +43,25 @@ $(function (){
         alert('注销登录失败，原因是' + data.responseText);
       },
     });
+  });
+
+  $('.input_btn'). on('click', function () {
+
+    var keyword = $('#search_1').val();
+    var keyword_1 = $('#option_3').val();
+    if(keyword_1 == 0 ){
+
+    }
+    if(keyword_1 == 1){    console.log("2");
+      key = keyword;
+      getOrderListByTitle();
+      reloadActivePage();
+    }
+    if(keyword_1 == 2){
+
+    }
+
+
   });
 
   function getMaxPage() {
@@ -139,12 +159,13 @@ $(function (){
     });
   }
 
-  function getOrderListByStoreName() {
+  function getOrderListByTitle() {
     $.ajax({
       type: 'GET',
-      url: '/order/list',
+      url: '/order/list_title',
       data: {
         page: now_page,
+        title: key,
       },
       xhrFields: { withCredentials: true },
       success(data) {

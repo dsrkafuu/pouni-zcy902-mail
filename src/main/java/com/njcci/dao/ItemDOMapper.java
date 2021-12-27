@@ -2,8 +2,9 @@
 package com.njcci.dao;
 
 import com.njcci.dataobject.ItemDO;
-import java.util.List;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ItemDOMapper {
@@ -32,6 +33,8 @@ public interface ItemDOMapper {
     List<ItemDO> selectByStoreName(String storeName, Integer offset);
 
     Integer getCountByStoreName(String storeName);
+
+    Integer getItemByTitle(String title);
 
     int updateByPrimaryKeySelective(ItemDO record);
 

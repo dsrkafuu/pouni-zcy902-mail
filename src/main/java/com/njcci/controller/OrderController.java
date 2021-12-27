@@ -1,5 +1,6 @@
 package com.njcci.controller;
 
+import com.njcci.controller.viewobject.OrderVO;
 import com.njcci.error.BusinessException;
 import com.njcci.error.EmBusinessError;
 import com.njcci.response.CommonReturnType;
@@ -8,19 +9,14 @@ import com.njcci.service.OrderService;
 import com.njcci.service.model.LogisticsModel;
 import com.njcci.service.model.OrderModel;
 import com.njcci.service.model.UserModel;
-import com.njcci.controller.viewobject.OrderVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping({"/order"})
@@ -94,6 +90,25 @@ public class OrderController extends BaseController {
         if (isLogin != null && isLogin) {
             UserModel userModel = (UserModel)this.httpServletRequest.getSession().getAttribute("LOGIN_USER");
             List<OrderModel> orderModelList = this.orderService.getOrders(userModel.getId(), page);
+            List<OrderVO> orderVOList = (List)orderModelList.stream().map((orderModel) -> {
+                OrderVO orderVO = this.convertFromModel(orderModel);
+                return orderVO;
+            }).collect(Collectors.toList());
+            return CommonReturnType.create(orderVOList);
+        } else {
+            throw new BusinessException(EmBusinessError.USER_NOT_LOGIN);
+        }
+    }
+    @RequestMapping(
+            value = {"/list_title"},
+            method = {RequestMethod.GET}
+    )
+    public CommonReturnType getOrderByTitle(@RequestParam(name = "page") Integer page, @RequestParam(name = "title") String title) {
+        System.out.println("23456");
+        Boolean isLogin = (Boolean)this.httpServletRequest.getSession().getAttribute("IS_USER_LOGIN");
+        if (isLogin != null && isLogin) {
+            UserModel userModel = (UserModel)this.httpServletRequest.getSession().getAttribute("LOGIN_USER");
+            List<OrderModel> orderModelList = this.orderService.getOrderByTitle(userModel.getId(), page, title);
             List<OrderVO> orderVOList = (List)orderModelList.stream().map((orderModel) -> {
                 OrderVO orderVO = this.convertFromModel(orderModel);
                 return orderVO;

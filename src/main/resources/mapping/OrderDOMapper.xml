@@ -50,6 +50,13 @@
     from order_info
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserIdAndItemId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_info
+    where user_id = #{userId,jdbcType=INTEGER} and status != 3 and item_id = #{itemId,jdbcType=INTEGER}
+    order by create_time DESC limit #{offset,jdbcType=INTEGER} , 3
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     <!--
       WARNING - @mbg.generated
