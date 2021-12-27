@@ -126,7 +126,6 @@ public class OrderController extends BaseController {
     public CommonReturnType getOrderById(String id) {
         OrderModel orderModel = this.orderService.getOrder(id);
         OrderVO orderVO = this.convertFromModel(orderModel);
-        //System.out.println(orderModel.getStatus());
         return CommonReturnType.create(orderVO);
     }
 

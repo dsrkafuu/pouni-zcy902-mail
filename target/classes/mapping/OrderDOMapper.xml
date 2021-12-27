@@ -197,4 +197,9 @@
     set status = 3
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <update id="changeStatus" parameterType="java.lang.String">
+    update order_info
+    set status = 4
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
 </mapper>

@@ -225,7 +225,6 @@ public class OrderServiceImpl implements OrderService {
             } else {
                 logisticsDO.setStatus(2);
                 this.orderDOMapper.changeStatus(orderId);
-                System.out.println(orderId);
                 this.logisticsDOMapper.updateByPrimaryKeySelective(logisticsDO);
                 LogisticsModel logisticsModel = this.convertFromDataObject(logisticsDO);
                 return logisticsModel;

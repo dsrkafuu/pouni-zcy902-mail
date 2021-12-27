@@ -28,7 +28,7 @@ public class OrderModel {
     //付款方式 1.货到付款 2.微信支付 3.支付宝 4.银行卡
     private Integer paymentMethod;
 
-    //订单状态 1.待支付，2.已付款，3.已取消
+    //订单状态 1.待支付，2.已付款，3.已取消 4.运输中
     private Integer status;
 
     public String getId() {

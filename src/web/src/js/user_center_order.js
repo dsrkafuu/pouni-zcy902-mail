@@ -1,4 +1,4 @@
-import $ from 'jquery';
+ import $ from 'jquery';
 
 $(function (){
   var now_page = 1;
@@ -118,6 +118,28 @@ $(function (){
   }
 
   function getOrderList() {
+    $.ajax({
+      type: 'GET',
+      url: '/order/list',
+      data: {
+        page: now_page,
+      },
+      xhrFields: { withCredentials: true },
+      success(data) {
+        if (data.status == 'success') {
+          order_list = data.data;
+          reloadOrder();
+        } else {
+          alert('获取订单列表失败，原因是' + data.data.errMsg);
+        }
+      },
+      error(data) {
+        alert('获取订单列表失败，原因是' + data.responseText);
+      },
+    });
+  }
+
+  function getOrderListByStoreName() {
     $.ajax({
       type: 'GET',
       url: '/order/list',
