@@ -66,6 +66,7 @@ body {
 }
 
 .search_con {
+  position: relative;
   width: 616px;
   height: 38px;
   border: 1px solid #c26490;
@@ -92,6 +93,14 @@ body {
   color: #fff;
   font-family: 'Microsoft Yahei';
   outline: none;
+  cursor: pointer;
+}
+.search_con .order_status_sel {
+  position: absolute;
+  left: -120px;
+  height: 38px;
+  width: 100px;
+  border: 1px solid #c26490;
   cursor: pointer;
 }
 
