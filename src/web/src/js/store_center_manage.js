@@ -78,6 +78,8 @@ $(function (){
       reloadActivePage();
     }
     if(keyword_1 == 2){
+      key = keyword;
+      getLogisticsListByAddressId();
       reloadActivePage();
     }
   });
@@ -210,6 +212,30 @@ $(function (){
       data: {
         page: now_page,
         id: key,
+      },
+      xhrFields: { withCredentials: true },
+      success(data) {
+        if (data.status == 'success') {
+          logistics_list = data.data;
+          reloadLogistics();
+        } else {
+          alert('获取订单列表失败，原因是' + data.data.errMsg);
+        }
+      },
+      error(data) {
+        alert('获取订单列表失败，原因是' + data.responseText);
+      },
+    });
+  }
+
+  function getLogisticsListByAddressId() {
+    $.ajax({
+      type: 'POST',
+      contentType: 'application/x-www-form-urlencoded',
+      url: '/store/getlogistics_addressid',
+      data: {
+        page: now_page,
+        addressName: key,
       },
       xhrFields: { withCredentials: true },
       success(data) {

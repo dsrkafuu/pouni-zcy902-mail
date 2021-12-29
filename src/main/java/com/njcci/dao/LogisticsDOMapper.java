@@ -20,6 +20,8 @@ public interface LogisticsDOMapper {
 
     List<LogisticsDO> listByStoreNameAndOrderId(String storeName, Integer offset, String orderId);
 
+    List<LogisticsDO> listByStoreNameAndAddressId(String storeName, Integer offset, Integer addressId);
+
     int getCountByStoreName(String storeName);
 
     String getOrderIdById(String id);

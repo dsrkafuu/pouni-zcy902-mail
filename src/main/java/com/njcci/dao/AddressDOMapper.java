@@ -1,8 +1,9 @@
 package com.njcci.dao;
 
 import com.njcci.dataobject.AddressDO;
-import java.util.List;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface AddressDOMapper {
@@ -23,4 +24,6 @@ public interface AddressDOMapper {
     int setMainAddress(Integer id);
 
     int setUsualAddress(Integer userId);
+
+    int selectIdByAddressName(String addressName);
 }

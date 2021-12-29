@@ -270,6 +270,20 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    public List<LogisticsModel> getLogisticsListByAddressId(String storeName, Integer page, String addressName) {
+
+        Integer addressId_1 = 0;
+        List<LogisticsDO> logisticsDOList = this.logisticsDOMapper.listByStoreNameAndAddressId(storeName, (page - 1) * 3, addressId_1);
+        if (logisticsDOList == null) {
+            return null;
+        } else {
+            List<LogisticsModel> logisticsModelList = (List)logisticsDOList.stream().map((logisticsDO) -> {
+                LogisticsModel logisticsModel = this.convertFromDataObject(logisticsDO);
+                return logisticsModel;
+            }).collect(Collectors.toList());
+            return logisticsModelList;
+        }
+    }
     public Integer getCountByStoreName(String storeName) {
         int result = this.logisticsDOMapper.getCountByStoreName(storeName);
         return result;

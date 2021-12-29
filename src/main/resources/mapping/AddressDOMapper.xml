@@ -40,6 +40,12 @@
     from address_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectIdByAddressName" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select id
+    <include refid="Base_Column_List" />
+    from address_info
+    where addressee_name = #{addressName,jdbcType=VACHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated
