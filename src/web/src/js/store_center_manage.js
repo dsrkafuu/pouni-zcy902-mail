@@ -29,6 +29,12 @@ $(function () {
           getLogisticsListByTitle();
           reloadActivePage();
         }
+        if(keyword_1 == 2){
+          now_page++;
+          key = keyword;
+          getLogisticsListByDeliveryName();
+          reloadActivePage();
+        }
         if(keyword_1 == 3){
           now_page++;
           key = keyword;
@@ -59,6 +65,12 @@ $(function () {
           getLogisticsListByTitle();
           reloadActivePage();
         }
+        if(keyword_1 == 2){
+          now_page--;
+          key = keyword;
+          getLogisticsListByDeliveryName();
+          reloadActivePage();
+        }
         if(keyword_1 == 3){
           now_page--;
           key = keyword;
@@ -81,6 +93,11 @@ $(function () {
     if(keyword_1 == 1){
       key = keyword;
       getLogisticsListByTitle();
+      reloadActivePage();
+    }
+    if(keyword_1 == 2){
+      key = keyword;
+      getLogisticsListByDeliveryName();
       reloadActivePage();
     }
     if(keyword_1 == 3){
