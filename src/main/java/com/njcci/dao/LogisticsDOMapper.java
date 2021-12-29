@@ -22,6 +22,8 @@ public interface LogisticsDOMapper {
 
     List<LogisticsDO> listByStoreNameAndAddressId(String storeName, Integer offset, Integer addressId);
 
+    List<LogisticsDO> listByStoreNameAndDeliveryName(String storeName, Integer offset, String deliveryName);
+
     int getCountByStoreName(String storeName);
 
     String getOrderIdById(String id);

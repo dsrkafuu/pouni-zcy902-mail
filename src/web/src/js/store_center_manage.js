@@ -32,7 +32,7 @@ $(function () {
         if(keyword_1 == 3){
           now_page++;
           key = keyword;
-          getLogisticsListByAddressId();
+          getLogisticsListByAddressName();
           reloadActivePage();
         }
       }
@@ -62,7 +62,7 @@ $(function () {
         if(keyword_1 == 3){
           now_page--;
           key = keyword;
-          getLogisticsListByAddressId();
+          getLogisticsListByAddressName();
           reloadActivePage();
         }
       }
@@ -85,7 +85,7 @@ $(function () {
     }
     if(keyword_1 == 3){
       key = keyword;
-      getLogisticsListByAddressId();
+      getLogisticsListByAddressName();
       reloadActivePage();
     }
   });
@@ -225,7 +225,7 @@ $(function () {
     });
   }
 
-  function getLogisticsListByAddressId() {
+  function getLogisticsListByAddressName() {
     $.ajax({
       type: 'POST',
       contentType: 'application/x-www-form-urlencoded',
@@ -233,6 +233,29 @@ $(function () {
       data: {
         page: now_page,
         addressName: key,
+      },
+      xhrFields: { withCredentials: true },
+      success(data) {
+        if (data.status == 'success') {
+          logistics_list = data.data;
+          reloadLogistics();
+        } else {
+          alert('获取订单列表失败，原因是' + data.data.errMsg);
+        }
+      },
+      error(data) {
+        alert('获取订单列表失败，原因是' + data.responseText);
+      },
+    });
+  }
+  function getLogisticsListByDeliveryName() {
+    $.ajax({
+      type: 'POST',
+      contentType: 'application/x-www-form-urlencoded',
+      url: '/store/getlogistics_deliveryName',
+      data: {
+        page: now_page,
+        deliveryName: key,
       },
       xhrFields: { withCredentials: true },
       success(data) {

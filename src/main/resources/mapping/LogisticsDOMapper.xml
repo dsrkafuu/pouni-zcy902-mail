@@ -67,6 +67,13 @@
     where store_name = #{storeName,jdbcType=VARCHAR} and address_id = #{addressId,jdbcType=INTEGER}
     order by create_time DESC limit #{offset,jdbcType=INTEGER} , 3
   </select>
+  <select id="listByStoreNameAndDeliveryName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from logistics_info
+    where store_name = #{storeName,jdbcType=VARCHAR} and delivery_company = #{deliveryName,jdbcType=VARCHAR}
+    order by create_time DESC limit #{offset,jdbcType=INTEGER} , 3
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     <!--
       WARNING - @mbg.generated

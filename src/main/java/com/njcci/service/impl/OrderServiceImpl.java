@@ -271,8 +271,19 @@ public class OrderServiceImpl implements OrderService {
 
     public List<LogisticsModel> getLogisticsListByAddressId(String storeName, Integer page, String addressName) {
         Integer addressId_1 = this.addressDOMapper.selectIdByAddressName(addressName);
-        System.out.println((page - 1) * 3);
         List<LogisticsDO> logisticsDOList = this.logisticsDOMapper.listByStoreNameAndAddressId  (storeName, (page - 1) * 3, addressId_1);
+        if (logisticsDOList == null) {
+            return null;
+        } else {
+            List<LogisticsModel> logisticsModelList = (List)logisticsDOList.stream().map((logisticsDO) -> {
+                LogisticsModel logisticsModel = this.convertFromDataObject(logisticsDO);
+                return logisticsModel;
+            }).collect(Collectors.toList());
+            return logisticsModelList;
+        }
+    }
+    public List<LogisticsModel> getLogisticsListByDeliveryName(String storeName, Integer page, String deliveryName) {
+        List<LogisticsDO> logisticsDOList = this.logisticsDOMapper. listByStoreNameAndDeliveryName (storeName, (page - 1) * 3, deliveryName);
         if (logisticsDOList == null) {
             return null;
         } else {

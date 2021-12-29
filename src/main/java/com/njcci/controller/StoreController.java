@@ -150,6 +150,21 @@ public class StoreController extends BaseController {
         }
     }
     @RequestMapping(
+            value = {"/getlogistics_deliveryName"},
+            method = {RequestMethod.POST},
+            consumes = {"application/x-www-form-urlencoded"}
+    )
+    public CommonReturnType getLogisticsListByDeliveryName(@RequestParam(name = "page") Integer page, @RequestParam(name = "deliveryName") String deliveryName) {
+        Boolean isStoreLogin = (Boolean)this.httpServletRequest.getSession().getAttribute("IS_STORE_LOGIN");
+        if (isStoreLogin != null && isStoreLogin) {
+            StoreModel storeModel = (StoreModel)this.httpServletRequest.getSession().getAttribute("LOGIN_STORE");
+            List<LogisticsModel> logisticsModelList = this.orderService.getLogisticsListByDeliveryName(storeModel.getStoreName(), page, deliveryName);
+            return CommonReturnType.create(logisticsModelList);
+        } else {
+            throw new BusinessException(EmBusinessError.STORE_NOT_LOGIN, "商铺登录信息失效");
+        }
+    }
+    @RequestMapping(
             value = {"/getcount"},
             method = {RequestMethod.GET}
     )
