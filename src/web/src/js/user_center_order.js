@@ -1,91 +1,91 @@
- import $ from 'jquery';
+import $ from 'jquery';
 
-$(function (){
+$(function () {
   var now_page = 1;
   var max_page = 1;
   var order_list = [];
-  var key = "abc";
+  var key = 'abc';
   getMaxPage();
   getOrderList();
 
-  $('#pg_dn'). on('click', function () {
-    var keyword = $('#search_1').val();
-    var keyword_1 = $('#option_3').val();
-    if (now_page < max_page) {
-      if(!keyword){
-        now_page++;
-        getOrderList();
-        reloadActivePage();
-      }else{
-        if(keyword_1 == 0 ){
-          now_page++;
-          key = keyword;
-          getOrderListById();
-          reloadActivePage();
-        }
-        if(keyword_1 == 1){
-          now_page++;
-          key = keyword;
-          getOrderListByTitle();
-          reloadActivePage();
-        }
-        if(keyword_1 == 2){
-          now_page++;
-          if(keyword == "未付款"){
-            key = 1;
-          }
-          if(keyword == "待付款"){
-            key = 2;
-          }
-          if(keyword == "运输中"){
-            key = 4;
-          }
-          getOrderListByStatus();
-          reloadActivePage();
-        }
-      }
-    }
-  });
-  $('#pg_up'). on('click', function () {
-    var keyword = $('#search_1').val();
-    var keyword_1 = $('#option_3').val();
-    if (now_page > 1) {
-      if(!keyword){
-        now_page--;
-        getOrderList();
-        reloadActivePage();
-      }else{
-        if(keyword_1 == 0 ){
-          now_page--;
-          key = keyword;
-          getOrderListById();
-          reloadActivePage();
-        }
-        if(keyword_1 == 1){
-          now_page--;
-          key = keyword;
-          getOrderListByTitle();
-          reloadActivePage();
-        }
-        if(keyword_1 == 2){
-          now_page--;
-          if(keyword == "未付款"){
-            key = 1;
-          }
-          if(keyword == "待付款"){
-            key = 2;
-          }
-          if(keyword == "运输中"){
-            key = 4;
-          }
-          getOrderListByStatus();
-          reloadActivePage();
-        }
-      }
-    }
-  });
+  // $('#pg_dn').on('click', function () {
+  //   var keyword = $('#search_1').val();
+  //   var keyword_1 = $('#option_3').val();
+  //   if (now_page < max_page) {
+  //     if (!keyword) {
+  //       now_page++;
+  //       getOrderList();
+  //       reloadActivePage();
+  //     } else {
+  //       if (keyword_1 == 0) {
+  //         now_page++;
+  //         key = keyword;
+  //         getOrderListById();
+  //         reloadActivePage();
+  //       }
+  //       if (keyword_1 == 1) {
+  //         now_page++;
+  //         key = keyword;
+  //         getOrderListByTitle();
+  //         reloadActivePage();
+  //       }
+  //       if (keyword_1 == 2) {
+  //         now_page++;
+  //         if (keyword == '未付款') {
+  //           key = 1;
+  //         }
+  //         if (keyword == '待付款') {
+  //           key = 2;
+  //         }
+  //         if (keyword == '运输中') {
+  //           key = 4;
+  //         }
+  //         getOrderListByStatus();
+  //         reloadActivePage();
+  //       }
+  //     }
+  //   }
+  // });
+  // $('#pg_up').on('click', function () {
+  //   var keyword = $('#search_1').val();
+  //   var keyword_1 = $('#option_3').val();
+  //   if (now_page > 1) {
+  //     if (!keyword) {
+  //       now_page--;
+  //       getOrderList();
+  //       reloadActivePage();
+  //     } else {
+  //       if (keyword_1 == 0) {
+  //         now_page--;
+  //         key = keyword;
+  //         getOrderListById();
+  //         reloadActivePage();
+  //       }
+  //       if (keyword_1 == 1) {
+  //         now_page--;
+  //         key = keyword;
+  //         getOrderListByTitle();
+  //         reloadActivePage();
+  //       }
+  //       if (keyword_1 == 2) {
+  //         now_page--;
+  //         if (keyword == '未付款') {
+  //           key = 1;
+  //         }
+  //         if (keyword == '待付款') {
+  //           key = 2;
+  //         }
+  //         if (keyword == '运输中') {
+  //           key = 4;
+  //         }
+  //         getOrderListByStatus();
+  //         reloadActivePage();
+  //       }
+  //     }
+  //   }
+  // });
 
-  $('#logout'). on('click', function () {
+  $('#logout').on('click', function () {
     $.ajax({
       type: 'GET',
       url: '/user/logout',
@@ -107,28 +107,27 @@ $(function (){
     });
   });
 
-  $('.input_btn'). on('click', function () {
-
+  $('.input_btn').on('click', function () {
     var keyword = $('#search_1').val();
     var keyword_1 = $('#option_3').val();
-    if(keyword_1 == 0 ){
+    if (keyword_1 == 0) {
       key = keyword;
       getOrderListById();
       reloadActivePage();
     }
-    if(keyword_1 == 1){
+    if (keyword_1 == 1) {
       key = keyword;
       getOrderListByTitle();
       reloadActivePage();
     }
-    if(keyword_1 == 2){
-      if(keyword == "未付款"){
+    if (keyword_1 == 2) {
+      if (keyword == '未付款') {
         key = 1;
       }
-      if(keyword == "待付款"){
+      if (keyword == '待付款') {
         key = 2;
       }
-      if(keyword == "运输中"){
+      if (keyword == '运输中') {
         key = 4;
       }
       getOrderListByStatus();
@@ -145,7 +144,7 @@ $(function (){
         if (data.status == 'success') {
           var num = data.data;
           if (num != 0) {
-            max_page = (num / 3 + 1).toFixed(0);
+            max_page = Math.ceil(num / 3);
             reloadPagenation();
           }
         } else {
@@ -163,19 +162,50 @@ $(function (){
 
   function reloadPagenation() {
     $('.pagenation').show();
-    if (max_page <= 6) {
-      for (let j = 2; j <= max_page; j++) {
-        let t = j - 1;
-        $('#page' + t).after('<a id="page' + j + '" href="#">' + j + '</a>');
-      }
-    } else {
-      $('#page1').after('<a id="page2" href="#">2</a>');
-      for (let j = 3; j <= 5; j++) {
-        let t = j - 1;
-        $('#page' + t).after('<a id="page' + j + '" href="#">.</a>');
-      }
-      $('#page5').after('<a id="page6" href="#">' + max_page + '</a>');
+    for (let j = 2; j <= max_page; j++) {
+      let t = j - 1;
+      $('#page' + t).after(
+        '<a id="page' + j + '" class="simple_page_btn" href="#">' + j + '</a>'
+      );
     }
+
+    $('.pagenation .simple_page_btn').each(function () {
+      $(this).on('click', function () {
+        console.log(1);
+        var thisPage = parseInt($(this).text());
+        var keyword = $('#search_1').val();
+        var keyword_1 = $('#option_3').val();
+        if (!keyword) {
+          getOrderList(thisPage);
+        } else {
+          if (keyword_1 == 0) {
+            key = keyword;
+            getOrderListById(thisPage);
+            reloadActivePage();
+          }
+          if (keyword_1 == 1) {
+            key = keyword;
+            getOrderListByTitle(thisPage);
+            reloadActivePage();
+          }
+          if (keyword_1 == 2) {
+            if (keyword == '未付款') {
+              key = 1;
+            }
+            if (keyword == '待付款') {
+              key = 2;
+            }
+            if (keyword == '运输中') {
+              key = 4;
+            }
+            getOrderListByStatus(thisPage);
+            reloadActivePage();
+          }
+        }
+        $('.pagenation').children('.active').removeClass('active');
+        $('#page' + thisPage).addClass('active');
+      });
+    });
   }
 
   function reloadActivePage() {
@@ -209,12 +239,12 @@ $(function (){
     }
   }
 
-  function getOrderList() {
+  function getOrderList(customPage) {
     $.ajax({
       type: 'GET',
       url: '/order/list',
       data: {
-        page: now_page,
+        page: customPage ? customPage : now_page,
       },
       xhrFields: { withCredentials: true },
       success(data) {
@@ -231,12 +261,12 @@ $(function (){
     });
   }
 
-  function getOrderListByTitle() {
+  function getOrderListByTitle(customPage) {
     $.ajax({
       type: 'GET',
       url: '/order/list_title',
       data: {
-        page: now_page,
+        page: customPage ? customPage : now_page,
         title: key,
       },
       xhrFields: { withCredentials: true },
@@ -254,12 +284,12 @@ $(function (){
     });
   }
 
-  function getOrderListById() {
+  function getOrderListById(customPage) {
     $.ajax({
       type: 'GET',
       url: '/order/list_id',
       data: {
-        page: now_page,
+        page: customPage ? customPage : now_page,
         id: key,
       },
       xhrFields: { withCredentials: true },
@@ -277,12 +307,12 @@ $(function (){
     });
   }
 
-  function getOrderListByStatus() {
+  function getOrderListByStatus(customPage) {
     $.ajax({
       type: 'GET',
       url: '/order/list_status',
       data: {
-        page: now_page,
+        page: customPage ? customPage : now_page,
         status: key,
       },
       xhrFields: { withCredentials: true },
@@ -334,11 +364,11 @@ $(function (){
           });
           $('#send_msg_' + i).hide();
           $('#get_logistics_' + i).hide();
-          $('#pay_btn_' + i). on('click', function () {
+          $('#pay_btn_' + i).on('click', function () {
             var id = $(this).data('id');
             window.location.href = '/center-order.html?id=' + id;
           });
-          $('#cancel_btn_' + i). on('click', function () {
+          $('#cancel_btn_' + i).on('click', function () {
             var id = $(this).data('id');
             $.ajax({
               type: 'POST',
