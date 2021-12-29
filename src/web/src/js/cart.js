@@ -9,6 +9,10 @@ function getCartList() {
       if (data.status == 'success') {
         const cart_list = data.data;
         reloadCartList(cart_list);
+        $('#select_all').trigger('click');
+        if (!$('#select_all').is(':checked')) {
+          $('#select_all').trigger('click');
+        }
       } else {
         alert('获取购物车商品失败，原因是' + data.data.errMsg);
         if (data.data.errCode == 20003) {
