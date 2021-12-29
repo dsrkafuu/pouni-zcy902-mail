@@ -244,6 +244,32 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    public List<LogisticsModel> getLogisticsByTitle(String storeName, Integer page, String title) {
+        List<LogisticsDO> logisticsDOList = this.logisticsDOMapper.listByStoreName(storeName, (page - 1) * 3);
+        if (logisticsDOList == null) {
+            return null;
+        } else {
+            List<LogisticsModel> logisticsModelList = (List)logisticsDOList.stream().map((logisticsDO) -> {
+                LogisticsModel logisticsModel = this.convertFromDataObject(logisticsDO);
+                return logisticsModel;
+            }).collect(Collectors.toList());
+            return logisticsModelList;
+        }
+    }
+
+    public List<LogisticsModel> getLogisticsById(String storeName, Integer page, String id) {
+        List<LogisticsDO> logisticsDOList = this.logisticsDOMapper.listByStoreNameAndOrderId(storeName, (page - 1) * 3, id);
+        if (logisticsDOList == null) {
+            return null;
+        } else {
+            List<LogisticsModel> logisticsModelList = (List)logisticsDOList.stream().map((logisticsDO) -> {
+                LogisticsModel logisticsModel = this.convertFromDataObject(logisticsDO);
+                return logisticsModel;
+            }).collect(Collectors.toList());
+            return logisticsModelList;
+        }
+    }
+
     public Integer getCountByStoreName(String storeName) {
         int result = this.logisticsDOMapper.getCountByStoreName(storeName);
         return result;

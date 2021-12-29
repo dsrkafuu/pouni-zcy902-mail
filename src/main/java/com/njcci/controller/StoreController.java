@@ -1,5 +1,6 @@
 package com.njcci.controller;
 
+import com.njcci.controller.viewobject.StoreVO;
 import com.njcci.error.BusinessException;
 import com.njcci.error.EmBusinessError;
 import com.njcci.response.CommonReturnType;
@@ -7,8 +8,12 @@ import com.njcci.service.OrderService;
 import com.njcci.service.StoreService;
 import com.njcci.service.model.LogisticsModel;
 import com.njcci.service.model.StoreModel;
-import com.njcci.controller.viewobject.StoreVO;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -16,15 +21,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
@@ -108,7 +104,36 @@ public class StoreController extends BaseController {
             throw new BusinessException(EmBusinessError.STORE_NOT_LOGIN, "商铺登录信息失效");
         }
     }
-
+    @RequestMapping(
+            value = {"/getlogistics_title"},
+            method = {RequestMethod.POST},
+            consumes = {"application/x-www-form-urlencoded"}
+    )
+    public CommonReturnType getLogisticsByTitle(@RequestParam(name = "page") Integer page, @RequestParam(name = "title") String title) {
+        Boolean isStoreLogin = (Boolean)this.httpServletRequest.getSession().getAttribute("IS_STORE_LOGIN");
+        if (isStoreLogin != null && isStoreLogin) {
+            StoreModel storeModel = (StoreModel)this.httpServletRequest.getSession().getAttribute("LOGIN_STORE");
+            List<LogisticsModel> logisticsModelList = this.orderService.getLogisticsByTitle(storeModel.getStoreName(), page, title);
+            return CommonReturnType.create(logisticsModelList);
+        } else {
+            throw new BusinessException(EmBusinessError.STORE_NOT_LOGIN, "商铺登录信息失效");
+        }
+    }
+    @RequestMapping(
+            value = {"/getlogistics_id"},
+            method = {RequestMethod.POST},
+            consumes = {"application/x-www-form-urlencoded"}
+    )
+    public CommonReturnType getLogisticsById(@RequestParam(name = "page") Integer page, @RequestParam(name = "id") String id) {
+        Boolean isStoreLogin = (Boolean)this.httpServletRequest.getSession().getAttribute("IS_STORE_LOGIN");
+        if (isStoreLogin != null && isStoreLogin) {
+            StoreModel storeModel = (StoreModel)this.httpServletRequest.getSession().getAttribute("LOGIN_STORE");
+            List<LogisticsModel> logisticsModelList = this.orderService.getLogisticsById(storeModel.getStoreName(), page, id);
+            return CommonReturnType.create(logisticsModelList);
+        } else {
+            throw new BusinessException(EmBusinessError.STORE_NOT_LOGIN, "商铺登录信息失效");
+        }
+    }
     @RequestMapping(
             value = {"/getcount"},
             method = {RequestMethod.GET}

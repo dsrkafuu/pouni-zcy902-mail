@@ -134,8 +134,6 @@ $(function (){
       getOrderListByStatus();
       reloadActivePage();
     }
-
-
   });
 
   function getMaxPage() {
