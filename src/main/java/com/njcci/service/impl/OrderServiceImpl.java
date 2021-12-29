@@ -165,6 +165,15 @@ public class OrderServiceImpl implements OrderService {
         return orderModelList;
     }
 
+    public List<OrderModel> getOrderByStatus(Integer userId, Integer page, Integer status) {
+        List<OrderDO> orderDOList = this.orderDOMapper.selectByUserIdAndStatus(userId, (page - 1) * 3, status);
+        List<OrderModel> orderModelList = (List)orderDOList.stream().map((orderDO) -> {
+            OrderModel orderModel = this.convertFromDataObject(orderDO);
+            return orderModel;
+        }).collect(Collectors.toList());
+        return orderModelList;
+    }
+
     public Integer getCount(Integer userId) {
         Integer result = this.orderDOMapper.getCountByUserId(userId);
         System.out.println(result);
@@ -224,6 +233,32 @@ public class OrderServiceImpl implements OrderService {
 
     public List<LogisticsModel> getLogistics(String storeName, Integer page) {
         List<LogisticsDO> logisticsDOList = this.logisticsDOMapper.listByStoreName(storeName, (page - 1) * 3);
+        if (logisticsDOList == null) {
+            return null;
+        } else {
+            List<LogisticsModel> logisticsModelList = (List)logisticsDOList.stream().map((logisticsDO) -> {
+                LogisticsModel logisticsModel = this.convertFromDataObject(logisticsDO);
+                return logisticsModel;
+            }).collect(Collectors.toList());
+            return logisticsModelList;
+        }
+    }
+
+    public List<LogisticsModel> getLogisticsByTitle(String storeName, Integer page, String title) {
+        List<LogisticsDO> logisticsDOList = this.logisticsDOMapper.listByStoreName(storeName, (page - 1) * 3);
+        if (logisticsDOList == null) {
+            return null;
+        } else {
+            List<LogisticsModel> logisticsModelList = (List)logisticsDOList.stream().map((logisticsDO) -> {
+                LogisticsModel logisticsModel = this.convertFromDataObject(logisticsDO);
+                return logisticsModel;
+            }).collect(Collectors.toList());
+            return logisticsModelList;
+        }
+    }
+
+    public List<LogisticsModel> getLogisticsById(String storeName, Integer page, String id) {
+        List<LogisticsDO> logisticsDOList = this.logisticsDOMapper.listByStoreNameAndOrderId(storeName, (page - 1) * 3, id);
         if (logisticsDOList == null) {
             return null;
         } else {

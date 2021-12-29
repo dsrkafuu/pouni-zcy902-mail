@@ -2,8 +2,9 @@
 package com.njcci.dao;
 
 import com.njcci.dataobject.LogisticsDO;
-import java.util.List;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface LogisticsDOMapper {
@@ -16,6 +17,8 @@ public interface LogisticsDOMapper {
     LogisticsDO selectByPrimaryKey(String id);
 
     List<LogisticsDO> listByStoreName(String storeName, Integer offset);
+
+    List<LogisticsDO> listByStoreNameAndOrderId(String storeName, Integer offset, String orderId);
 
     int getCountByStoreName(String storeName);
 

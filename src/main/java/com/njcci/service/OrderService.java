@@ -22,6 +22,8 @@ public interface OrderService {
 
     List<OrderModel> getOrderById(Integer userId, Integer page, String id);
 
+    List<OrderModel> getOrderByStatus(Integer userId, Integer page, Integer status);
+
     Integer getCount(Integer userId);
 
     LogisticsModel completeOrder(String id, Integer userId, Integer paymentMethod, Integer addressId);
@@ -31,6 +33,10 @@ public interface OrderService {
     LogisticsModel completeLogistics(String id, String deliveryCompany, String deliveryNumber, String storeName);
 
     List<LogisticsModel> getLogistics(String storeName, Integer page);
+
+    List<LogisticsModel> getLogisticsByTitle(String storeName, Integer page, String title);
+
+    List<LogisticsModel> getLogisticsById(String storeName, Integer page, String id);
 
     Integer getCountByStoreName(String storeName);
 }

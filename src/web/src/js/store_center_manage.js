@@ -4,24 +4,83 @@ $(function () {
   var now_page = 1;
   var max_page = 1;
   var logistics_list = [];
+  var key = 'abc';
   getMaxPage();
   getLogisticsList();
 
-  $('#pg_dn').on('click', function () {
+  $('#pg_dn'). on('click', function () {
+    var keyword = $('#search_1').val();
+    var keyword_1 = $('#option_3').val();
     if (now_page < max_page) {
-      now_page++;
-      getLogisticsList();
-      reloadActivePage();
+      if(!keyword){
+        now_page++;
+        getLogisticsList();
+        reloadActivePage();
+      }else{
+        if(keyword_1 == 0 ){
+          now_page++;
+          key = keyword;
+          getLogisticsListById();
+          reloadActivePage();
+        }
+        if(keyword_1 == 1){
+          now_page++;
+          key = keyword;
+          getLogisticsListByTitle();
+          reloadActivePage();
+        }
+        if(keyword_1 == 2){
+          reloadActivePage();
+        }
+      }
     }
   });
-  $('#pg_up').on('click', function () {
+  $('#pg_up'). on('click', function () {
+    var keyword = $('#search_1').val();
+    var keyword_1 = $('#option_3').val();
     if (now_page > 1) {
-      now_page--;
-      getLogisticsList();
-      reloadActivePage();
+      if(!keyword){
+        now_page--;
+        getLogisticsList();
+        reloadActivePage();
+      }else{
+        if(keyword_1 == 0 ){
+          now_page--;
+          key = keyword;
+          getLogisticsListById();
+          reloadActivePage();
+        }
+        if(keyword_1 == 1){
+          now_page--;
+          key = keyword;
+          getLogisticsListByTitle();
+          reloadActivePage();
+        }
+        if(keyword_1 == 2){
+          reloadActivePage();
+        }
+      }
+
     }
   });
 
+  $('.input_btn'). on('click', function () {
+    var keyword = $('#search_1').val();
+    var keyword_1 = $('#option_3').val();
+    if(keyword_1 == 0 ){
+      key = keyword;
+      getLogisticsListById();
+      reloadActivePage();
+    }
+    if(keyword_1 == 1){
+      key = keyword;
+      getLogisticsListByTitle();
+      reloadActivePage();
+    }
+    if(keyword_1 == 2){
+      reloadActivePage();
+    }
+  });
   function getMaxPage() {
     $.ajax({
       type: 'GET',
@@ -110,6 +169,53 @@ $(function () {
     });
   }
 
+  function getLogisticsListByTitle() {
+    $.ajax({
+      type: 'POST',
+      contentType: 'application/x-www-form-urlencoded',
+      url: '/store/getlogistics_title',
+      data: {
+        page: now_page,
+        title: key,
+      },
+      xhrFields: { withCredentials: true },
+      success(data) {
+        if (data.status == 'success') {
+          logistics_list = data.data;
+          reloadLogistics();
+        } else {
+          alert('获取订单列表失败，原因是' + data.data.errMsg);
+        }
+      },
+      error(data) {
+        alert('获取订单列表失败，原因是' + data.responseText);
+      },
+    });
+  }
+
+  function getLogisticsListById() {
+    $.ajax({
+      type: 'POST',
+      contentType: 'application/x-www-form-urlencoded',
+      url: '/store/getlogistics_id',
+      data: {
+        page: now_page,
+        id: key,
+      },
+      xhrFields: { withCredentials: true },
+      success(data) {
+        if (data.status == 'success') {
+          logistics_list = data.data;
+          reloadLogistics();
+        } else {
+          alert('获取订单列表失败，原因是' + data.data.errMsg);
+        }
+      },
+      error(data) {
+        alert('获取订单列表失败，原因是' + data.responseText);
+      },
+    });
+  }
   function reloadLogistics() {
     if (logistics_list != null) {
       $('.logistics_list').children('div').hide();
