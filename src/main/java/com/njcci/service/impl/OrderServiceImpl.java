@@ -148,13 +148,16 @@ public class OrderServiceImpl implements OrderService {
                 break;
             }
         }
-        System.out.println(userId);
-        System.out.println((page - 1) * 3);
-        System.out.println(item_id);
         List<OrderDO> orderDOList = this.orderDOMapper.selectByUserIdAndItemId(userId, (page - 1) * 3, item_id);
-        for(int i = 0;i<orderDOList.size();i++){
-            System.out.println(orderDOList.get(i).getId());
-        }
+        List<OrderModel> orderModelList = (List)orderDOList.stream().map((orderDO) -> {
+            OrderModel orderModel = this.convertFromDataObject(orderDO);
+            return orderModel;
+        }).collect(Collectors.toList());
+        return orderModelList;
+    }
+
+    public List<OrderModel> getOrderById(Integer userId, Integer page, String id) {
+        List<OrderDO> orderDOList = this.orderDOMapper.selectById(id,(page - 1) * 3);
         List<OrderModel> orderModelList = (List)orderDOList.stream().map((orderDO) -> {
             OrderModel orderModel = this.convertFromDataObject(orderDO);
             return orderModel;

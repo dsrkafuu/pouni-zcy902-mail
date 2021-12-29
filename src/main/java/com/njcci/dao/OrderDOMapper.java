@@ -20,6 +20,8 @@ public interface OrderDOMapper {
 
     List<OrderDO> selectByUserIdAndItemId(Integer userId, Integer offset, Integer itemId);
 
+    List<OrderDO> selectById(String id, Integer offset);
+
     int getCountByUserId(Integer userId);
 
     int updateByPrimaryKeySelective(OrderDO record);

@@ -18,7 +18,10 @@ $(function (){
         reloadActivePage();
       }else{
         if(keyword_1 == 0 ){
-
+          now_page--;
+          key = keyword;
+          getOrderListById();
+          reloadActivePage();
         }
         if(keyword_1 == 1){
           now_page++;
@@ -42,7 +45,10 @@ $(function (){
         reloadActivePage();
       }else{
         if(keyword_1 == 0 ){
-
+          now_page--;
+          key = keyword;
+          getOrderListById();
+          reloadActivePage();
         }
         if(keyword_1 == 1){
           now_page--;
@@ -84,7 +90,9 @@ $(function (){
     var keyword = $('#search_1').val();
     var keyword_1 = $('#option_3').val();
     if(keyword_1 == 0 ){
-
+      key = keyword;
+      getOrderListById();
+      reloadActivePage();
     }
     if(keyword_1 == 1){
       key = keyword;
@@ -200,6 +208,29 @@ $(function (){
       data: {
         page: now_page,
         title: key,
+      },
+      xhrFields: { withCredentials: true },
+      success(data) {
+        if (data.status == 'success') {
+          order_list = data.data;
+          reloadOrder();
+        } else {
+          alert('获取订单列表失败，原因是' + data.data.errMsg);
+        }
+      },
+      error(data) {
+        alert('获取订单列表失败，原因是' + data.responseText);
+      },
+    });
+  }
+
+  function getOrderListById() {
+    $.ajax({
+      type: 'GET',
+      url: '/order/list_id',
+      data: {
+        page: now_page,
+        id: key,
       },
       xhrFields: { withCredentials: true },
       success(data) {

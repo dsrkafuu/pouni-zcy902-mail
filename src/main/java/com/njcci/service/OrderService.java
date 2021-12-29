@@ -20,6 +20,8 @@ public interface OrderService {
 
     List<OrderModel> getOrderByTitle(Integer userId, Integer page, String title);
 
+    List<OrderModel> getOrderById(Integer userId, Integer page, String id);
+
     Integer getCount(Integer userId);
 
     LogisticsModel completeOrder(String id, Integer userId, Integer paymentMethod, Integer addressId);
