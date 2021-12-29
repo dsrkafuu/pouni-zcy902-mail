@@ -22,6 +22,8 @@ public interface OrderService {
 
     List<OrderModel> getOrderById(Integer userId, Integer page, String id);
 
+    List<OrderModel> getOrderByStatus(Integer userId, Integer page, Integer status);
+
     Integer getCount(Integer userId);
 
     LogisticsModel completeOrder(String id, Integer userId, Integer paymentMethod, Integer addressId);

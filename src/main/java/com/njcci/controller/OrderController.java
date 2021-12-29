@@ -136,6 +136,24 @@ public class OrderController extends BaseController {
         }
     }
     @RequestMapping(
+            value = {"/list_status"},
+            method = {RequestMethod.GET}
+    )
+    public CommonReturnType getOrderByStatus(@RequestParam(name = "page") Integer page, @RequestParam(name = "status") Integer status) {
+        Boolean isLogin = (Boolean)this.httpServletRequest.getSession().getAttribute("IS_USER_LOGIN");
+        if (isLogin != null && isLogin) {
+            UserModel userModel = (UserModel)this.httpServletRequest.getSession().getAttribute("LOGIN_USER");
+            List<OrderModel> orderModelList = this.orderService.getOrderByStatus(userModel.getId(), page, status);
+            List<OrderVO> orderVOList = (List)orderModelList.stream().map((orderModel) -> {
+                OrderVO orderVO = this.convertFromModel(orderModel);
+                return orderVO;
+            }).collect(Collectors.toList());
+            return CommonReturnType.create(orderVOList);
+        } else {
+            throw new BusinessException(EmBusinessError.USER_NOT_LOGIN);
+        }
+    }
+    @RequestMapping(
             value = {"/count"},
             method = {RequestMethod.GET}
     )

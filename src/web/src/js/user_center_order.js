@@ -18,7 +18,7 @@ $(function (){
         reloadActivePage();
       }else{
         if(keyword_1 == 0 ){
-          now_page--;
+          now_page++;
           key = keyword;
           getOrderListById();
           reloadActivePage();
@@ -30,7 +30,18 @@ $(function (){
           reloadActivePage();
         }
         if(keyword_1 == 2){
-
+          now_page++;
+          if(keyword == "未付款"){
+            key = 1;
+          }
+          if(keyword == "待付款"){
+            key = 2;
+          }
+          if(keyword == "运输中"){
+            key = 4;
+          }
+          getOrderListByStatus();
+          reloadActivePage();
         }
       }
     }
@@ -57,7 +68,18 @@ $(function (){
           reloadActivePage();
         }
         if(keyword_1 == 2){
-
+          now_page--;
+          if(keyword == "未付款"){
+            key = 1;
+          }
+          if(keyword == "待付款"){
+            key = 2;
+          }
+          if(keyword == "运输中"){
+            key = 4;
+          }
+          getOrderListByStatus();
+          reloadActivePage();
         }
       }
     }
@@ -100,7 +122,17 @@ $(function (){
       reloadActivePage();
     }
     if(keyword_1 == 2){
-
+      if(keyword == "未付款"){
+        key = 1;
+      }
+      if(keyword == "待付款"){
+        key = 2;
+      }
+      if(keyword == "运输中"){
+        key = 4;
+      }
+      getOrderListByStatus();
+      reloadActivePage();
     }
 
 
@@ -231,6 +263,29 @@ $(function (){
       data: {
         page: now_page,
         id: key,
+      },
+      xhrFields: { withCredentials: true },
+      success(data) {
+        if (data.status == 'success') {
+          order_list = data.data;
+          reloadOrder();
+        } else {
+          alert('获取订单列表失败，原因是' + data.data.errMsg);
+        }
+      },
+      error(data) {
+        alert('获取订单列表失败，原因是' + data.responseText);
+      },
+    });
+  }
+
+  function getOrderListByStatus() {
+    $.ajax({
+      type: 'GET',
+      url: '/order/list_status',
+      data: {
+        page: now_page,
+        status: key,
       },
       xhrFields: { withCredentials: true },
       success(data) {

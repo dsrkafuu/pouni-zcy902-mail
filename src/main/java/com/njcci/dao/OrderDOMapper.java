@@ -22,6 +22,8 @@ public interface OrderDOMapper {
 
     List<OrderDO> selectById(String id, Integer offset);
 
+    List<OrderDO> selectByUserIdAndStatus(Integer userId, Integer offset, Integer status);
+
     int getCountByUserId(Integer userId);
 
     int updateByPrimaryKeySelective(OrderDO record);

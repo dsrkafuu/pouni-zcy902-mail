@@ -165,6 +165,15 @@ public class OrderServiceImpl implements OrderService {
         return orderModelList;
     }
 
+    public List<OrderModel> getOrderByStatus(Integer userId, Integer page, Integer status) {
+        List<OrderDO> orderDOList = this.orderDOMapper.selectByUserIdAndStatus(userId, (page - 1) * 3, status);
+        List<OrderModel> orderModelList = (List)orderDOList.stream().map((orderDO) -> {
+            OrderModel orderModel = this.convertFromDataObject(orderDO);
+            return orderModel;
+        }).collect(Collectors.toList());
+        return orderModelList;
+    }
+
     public Integer getCount(Integer userId) {
         Integer result = this.orderDOMapper.getCountByUserId(userId);
         System.out.println(result);
