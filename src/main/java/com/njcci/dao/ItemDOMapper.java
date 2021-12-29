@@ -34,7 +34,7 @@ public interface ItemDOMapper {
 
     Integer getCountByStoreName(String storeName);
 
-    Integer getItemByTitle(String title);
+    //Integer getItemByTitle(String title);
 
     int updateByPrimaryKeySelective(ItemDO record);
 

@@ -104,7 +104,6 @@ public class OrderController extends BaseController {
             method = {RequestMethod.GET}
     )
     public CommonReturnType getOrderByTitle(@RequestParam(name = "page") Integer page, @RequestParam(name = "title") String title) {
-        System.out.println("23456");
         Boolean isLogin = (Boolean)this.httpServletRequest.getSession().getAttribute("IS_USER_LOGIN");
         if (isLogin != null && isLogin) {
             UserModel userModel = (UserModel)this.httpServletRequest.getSession().getAttribute("LOGIN_USER");
@@ -128,6 +127,7 @@ public class OrderController extends BaseController {
         if (isLogin != null && isLogin) {
             UserModel userModel = (UserModel)this.httpServletRequest.getSession().getAttribute("LOGIN_USER");
             Integer count = this.orderService.getCount(userModel.getId());
+            System.out.println(count);
             return CommonReturnType.create(count);
         } else {
             throw new BusinessException(EmBusinessError.USER_NOT_LOGIN);

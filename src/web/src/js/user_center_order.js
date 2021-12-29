@@ -9,17 +9,51 @@ $(function (){
   getOrderList();
 
   $('#pg_dn'). on('click', function () {
+    var keyword = $('#search_1').val();
+    var keyword_1 = $('#option_3').val();
     if (now_page < max_page) {
-      now_page++;
-      getOrderList();
-      reloadActivePage();
+      if(!keyword){
+        now_page++;
+        getOrderList();
+        reloadActivePage();
+      }else{
+        if(keyword_1 == 0 ){
+
+        }
+        if(keyword_1 == 1){
+          now_page++;
+          key = keyword;
+          getOrderListByTitle();
+          reloadActivePage();
+        }
+        if(keyword_1 == 2){
+
+        }
+      }
     }
   });
   $('#pg_up'). on('click', function () {
+    var keyword = $('#search_1').val();
+    var keyword_1 = $('#option_3').val();
     if (now_page > 1) {
-      now_page--;
-      getOrderList();
-      reloadActivePage();
+      if(!keyword){
+        now_page--;
+        getOrderList();
+        reloadActivePage();
+      }else{
+        if(keyword_1 == 0 ){
+
+        }
+        if(keyword_1 == 1){
+          now_page--;
+          key = keyword;
+          getOrderListByTitle();
+          reloadActivePage();
+        }
+        if(keyword_1 == 2){
+
+        }
+      }
     }
   });
 
@@ -52,7 +86,7 @@ $(function (){
     if(keyword_1 == 0 ){
 
     }
-    if(keyword_1 == 1){    console.log("2");
+    if(keyword_1 == 1){
       key = keyword;
       getOrderListByTitle();
       reloadActivePage();
@@ -73,7 +107,7 @@ $(function (){
         if (data.status == 'success') {
           var num = data.data;
           if (num != 0) {
-            max_page = (num / 10 + 1).toFixed(0);
+            max_page = (num / 3 + 1).toFixed(0);
             reloadPagenation();
           }
         } else {
@@ -185,6 +219,7 @@ $(function (){
   function reloadOrder() {
     if (order_list != null) {
       $('.order_list').hide();
+      console.log(order_list.length);
       for (var i = 0; i < order_list.length; i++) {
         var orderVO = order_list[i];
         var itemVO = getItem(orderVO.itemId);

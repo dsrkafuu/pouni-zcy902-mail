@@ -9,6 +9,7 @@ import com.njcci.dao.ItemDOMapper;
 import com.njcci.dao.LogisticsDOMapper;
 import com.njcci.dao.OrderDOMapper;
 import com.njcci.dao.SequenceDOMapper;
+import com.njcci.dataobject.ItemDO;
 import com.njcci.dataobject.LogisticsDO;
 import com.njcci.dataobject.OrderDO;
 import com.njcci.dataobject.SequenceDO;
@@ -139,10 +140,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public List<OrderModel> getOrderByTitle(Integer userId, Integer page, String title) {
-        Integer item_id = this.itemDOMapper.getItemByTitle(title);
-        List<OrderDO> orderDOList = this.orderDOMapper.selectByUserId(userId, (page - 1) * 3);
-        System.out.println(3);
-        //List<OrderDO> orderDOList = this.orderDOMapper.selectByUserIdAndItemId(userId, (page - 1) * 3, item_id);
+        List<ItemDO> itemDOList = this.itemDOMapper.selectByKeyWord(title,0);
+        Integer item_id = 0;
+        for(int i = 0;i<itemDOList.size();i++){
+            if(itemDOList.get(i).getTitle().equals(title)){
+                item_id = itemDOList.get(i).getId();
+                break;
+            }
+        }
+        System.out.println(userId);
+        System.out.println((page - 1) * 3);
+        System.out.println(item_id);
+        List<OrderDO> orderDOList = this.orderDOMapper.selectByUserIdAndItemId(userId, (page - 1) * 3, item_id);
+        for(int i = 0;i<orderDOList.size();i++){
+            System.out.println(orderDOList.get(i).getId());
+        }
         List<OrderModel> orderModelList = (List)orderDOList.stream().map((orderDO) -> {
             OrderModel orderModel = this.convertFromDataObject(orderDO);
             return orderModel;
@@ -152,6 +164,7 @@ public class OrderServiceImpl implements OrderService {
 
     public Integer getCount(Integer userId) {
         Integer result = this.orderDOMapper.getCountByUserId(userId);
+        System.out.println(result);
         return result;
     }
 
