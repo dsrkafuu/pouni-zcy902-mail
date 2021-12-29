@@ -1,20 +1,20 @@
 import $ from 'jquery';
 
-$(function (){
+$(function () {
   var now_page = 1;
   var max_page = 1;
   var logistics_list = [];
   getMaxPage();
   getLogisticsList();
 
-  $('#pg_dn'). on('click', function () {
+  $('#pg_dn').on('click', function () {
     if (now_page < max_page) {
       now_page++;
       getLogisticsList();
       reloadActivePage();
     }
   });
-  $('#pg_up'). on('click', function () {
+  $('#pg_up').on('click', function () {
     if (now_page > 1) {
       now_page--;
       getLogisticsList();
@@ -31,7 +31,7 @@ $(function (){
         if (data.status == 'success') {
           var num = data.data;
           if (num != 0) {
-            max_page = (num / 10 + 1).toFixed(0);
+            max_page = Math.ceil(num / 10);
             reloadPagenation();
           }
         } else {
@@ -46,18 +46,9 @@ $(function (){
 
   function reloadPagenation() {
     $('.pagenation').show();
-    if (max_page <= 6) {
-      for (let j = 2; j <= max_page; j++) {
-        let t = j - 1;
-        $('#page' + t).after('<a id="page' + j + '" href="#">' + j + '</a>');
-      }
-    } else {
-      $('#page1').after('<a id="page2" href="#">2</a>');
-      for (let j = 3; j <= 5; j++) {
-        let t = j - 1;
-        $('#page' + t).after('<a id="page' + j + '" href="#">.</a>');
-      }
-      $('#page5').after('<a id="page6" href="#">' + max_page + '</a>');
+    for (let j = 2; j <= max_page; j++) {
+      let t = j - 1;
+      $('#page' + t).after('<a id="page' + j + '" href="#">' + j + '</a>');
     }
   }
 
@@ -132,7 +123,7 @@ $(function (){
           new Date(logisticsVO.createTime).format('yyyy-MM-dd hh:mm:ss')
         );
         $('#order_id_' + i).html('订单号：' + logisticsVO.orderId);
-        console.log(orderVO)
+        console.log(orderVO);
         if (orderVO.status == 2) {
           $('#order_status_' + i).html('未发货');
         } else {
@@ -161,11 +152,11 @@ $(function (){
             'data-i': i,
           });
           $('#get_logistics_' + i).hide();
-          $('#write_info_' + i). on('click', function () {
+          $('#write_info_' + i).on('click', function () {
             $(this).hide();
             var i = $(this).data('i');
             $(this).next().show();
-            $('#sub_info_' + i). on('click', function () {
+            $('#sub_info_' + i).on('click', function () {
               var id = $(this).data('id');
               var i = $(this).data('i');
               var company = $('#company_' + i).val();
@@ -199,8 +190,7 @@ $(function (){
               }
             });
           });
-        } else if(orderVO.status === 4){
-
+        } else if (orderVO.status === 4) {
           $('#status_' + i).html('运输中');
           $('#get_logistics_' + i).show();
           $('#write_info_' + i).hide();
@@ -246,7 +236,7 @@ $(function (){
       xhrFields: { withCredentials: true },
       success(data) {
         if (data.status == 'success') {
-          console.log(data)
+          console.log(data);
           orderVO = data.data;
         } else {
           alert('获取订单信息失败，原因是' + data.data.errMsg);

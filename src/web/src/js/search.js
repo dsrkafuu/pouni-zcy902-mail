@@ -23,7 +23,7 @@ function getMaxPage() {
       if (data.status == 'success') {
         var num = data.data;
         if (num != 0) {
-          max_page = (num / 10 + 1).toFixed(0);
+          max_page = Math.ceil(num / 10);
         }
         reloadPagenation();
       }
@@ -58,25 +58,16 @@ function reloadItem(itemList) {
     $('#item_' + i)
       .find('span.unit')
       .html('/一件');
-    $('#item_' + i). on('click', function () {
+    $('#item_' + i).on('click', function () {
       window.location.href = '/detail.html?id=' + $(this).data('id');
     });
   }
 }
 
 function reloadPagenation() {
-  if (max_page <= 6) {
-    for (let j = 2; j <= max_page; j++) {
-      let t = j - 1;
-      $('#page' + t).after('<a id="page' + j + '" href="#">' + j + '</a>');
-    }
-  } else {
-    $('#page1').after('<a id="page2" href="#">2</a>');
-    for (let j = 3; j <= 5; j++) {
-      let t = j - 1;
-      $('#page' + t).after('<a id="page' + j + '" href="#">.</a>');
-    }
-    $('#page5').after('<a id="page6" href="#">' + max_page + '</a>');
+  for (let j = 2; j <= max_page; j++) {
+    let t = j - 1;
+    $('#page' + t).after('<a id="page' + j + '" href="#">' + j + '</a>');
   }
 }
 
@@ -136,18 +127,18 @@ function getItemList() {
   });
 }
 
-$(function (){
+$(function () {
   $('#search_title').html('搜索：' + GetQueryString('keyword'));
   getMaxPage();
   getItemList();
-  $('#pg_dn'). on('click', function () {
+  $('#pg_dn').on('click', function () {
     if (now_page < max_page) {
       now_page++;
       getItemList();
       reloadActivePage();
     }
   });
-  $('#pg_up'). on('click', function () {
+  $('#pg_up').on('click', function () {
     if (now_page > 1) {
       now_page--;
       getItemList();
