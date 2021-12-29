@@ -29,7 +29,10 @@ $(function () {
           getLogisticsListByTitle();
           reloadActivePage();
         }
-        if(keyword_1 == 2){
+        if(keyword_1 == 3){
+          now_page++;
+          key = keyword;
+          getLogisticsListByAddressId();
           reloadActivePage();
         }
       }
@@ -56,7 +59,10 @@ $(function () {
           getLogisticsListByTitle();
           reloadActivePage();
         }
-        if(keyword_1 == 2){
+        if(keyword_1 == 3){
+          now_page--;
+          key = keyword;
+          getLogisticsListByAddressId();
           reloadActivePage();
         }
       }
@@ -77,7 +83,7 @@ $(function () {
       getLogisticsListByTitle();
       reloadActivePage();
     }
-    if(keyword_1 == 2){
+    if(keyword_1 == 3){
       key = keyword;
       getLogisticsListByAddressId();
       reloadActivePage();
@@ -92,7 +98,7 @@ $(function () {
         if (data.status == 'success') {
           var num = data.data;
           if (num != 0) {
-            max_page = Math.ceil(num / 10);
+            max_page = Math.ceil(num / 3);
             reloadPagenation();
           }
         } else {

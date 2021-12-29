@@ -5,10 +5,7 @@
 
 package com.njcci.service.impl;
 
-import com.njcci.dao.ItemDOMapper;
-import com.njcci.dao.LogisticsDOMapper;
-import com.njcci.dao.OrderDOMapper;
-import com.njcci.dao.SequenceDOMapper;
+import com.njcci.dao.*;
 import com.njcci.dataobject.ItemDO;
 import com.njcci.dataobject.LogisticsDO;
 import com.njcci.dataobject.OrderDO;
@@ -39,6 +36,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderDOMapper orderDOMapper;
     @Autowired
     private SequenceDOMapper sequenceDOMapper;
+    @Autowired
+    private AddressDOMapper addressDOMapper;
     @Autowired
     private ItemService itemService;
     @Autowired
@@ -271,9 +270,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public List<LogisticsModel> getLogisticsListByAddressId(String storeName, Integer page, String addressName) {
-
-        Integer addressId_1 = 0;
-        List<LogisticsDO> logisticsDOList = this.logisticsDOMapper.listByStoreNameAndAddressId(storeName, (page - 1) * 3, addressId_1);
+        Integer addressId_1 = this.addressDOMapper.selectIdByAddressName(addressName);
+        System.out.println((page - 1) * 3);
+        List<LogisticsDO> logisticsDOList = this.logisticsDOMapper.listByStoreNameAndAddressId  (storeName, (page - 1) * 3, addressId_1);
         if (logisticsDOList == null) {
             return null;
         } else {
