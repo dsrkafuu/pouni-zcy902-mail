@@ -106,6 +106,9 @@ $(function () {
       reloadActivePage();
     }
   });
+  $('.input_btn'). on('click', function (){
+
+  });
   function getMaxPage() {
     $.ajax({
       type: 'GET',
