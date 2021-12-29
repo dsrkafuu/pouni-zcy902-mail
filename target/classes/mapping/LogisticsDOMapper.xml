@@ -53,6 +53,13 @@
     from logistics_info
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="listByStoreNameAndOrderId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from logistics_info
+    where store_name = #{storeName,jdbcType=VARCHAR} and order_id = #{orderId,jdbcType=VARCHAR}
+    order by create_time DESC limit #{offset,jdbcType=INTEGER} , 3
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     <!--
       WARNING - @mbg.generated
