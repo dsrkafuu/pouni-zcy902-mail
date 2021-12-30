@@ -304,7 +304,7 @@ $(function () {
           new Date(logisticsVO.createTime).format('yyyy-MM-dd hh:mm:ss')
         );
         $('#order_id_' + i).html('订单号：' + logisticsVO.orderId);
-        console.log(orderVO);
+        //console.log(orderVO);
         if (orderVO.status == 2) {
           $('#order_status_' + i).html('未发货');
         } else {
@@ -372,15 +372,72 @@ $(function () {
             });
           });
         } else if (orderVO.status === 4) {
-          $('#status_' + i).html('运输中');
-          $('#get_logistics_' + i).show();
-          $('#write_info_' + i).hide();
-          $('#send_list_' + i).hide();
-        }
+          let ii = i;
+          $('#status_' + ii).html('运输中');
+          $('#get_logistics_' + ii).show();
+          $('#write_info_' + ii).hide();
+          $('#send_list_' + ii).hide();
+          $('#get_logistics_' + ii).on('click', function(){
+            $(this).hide();
+            var id = logistics_list[ii].orderId;
+            var company = getCompany(id);
+            var number = getNum(id);
+            $('#send_list_' + ii).show();
+            $('#company_' + ii).val(company);
+            $('#number_' + ii).val(number);
+            $('#sub_info_' + ii).hide();
+          });
+         }
       }
     }
   }
 
+  function getCompany(id){
+    var company = "aaaa";
+    $.ajax({
+      type: 'GET',
+      url: '/order/company',
+      data: {
+        id: id,
+      },
+      async: false,
+      xhrFields: { withCredentials: true },
+      success(data) {
+        if (data.status == 'success') {
+          company = data.data;
+        } else {
+          alert('获取商品息失败，原因是' + data.data.errMsg);
+        }
+      },
+      error(data) {
+        alert('获取商品息失败，原因是' + data.responseText);
+      },
+    });
+    return company;
+  }
+  function getNum(id){
+    var number = "aaaa";
+    $.ajax({
+      type: 'GET',
+      url: '/order/number',
+      data: {
+        id: id,
+      },
+      async: false,
+      xhrFields: { withCredentials: true },
+      success(data) {
+        if (data.status == 'success') {
+          number = data.data;
+        } else {
+          alert('获取商品息失败，原因是' + data.data.errMsg);
+        }
+      },
+      error(data) {
+        alert('获取商品息失败，原因是' + data.responseText);
+      },
+    });
+    return number;
+  }
   function getItem(id) {
     var itemVO = [];
     $.ajax({
@@ -417,7 +474,7 @@ $(function () {
       xhrFields: { withCredentials: true },
       success(data) {
         if (data.status == 'success') {
-          console.log(data);
+          //console.log(data);
           orderVO = data.data;
         } else {
           alert('获取订单信息失败，原因是' + data.data.errMsg);

@@ -135,6 +135,7 @@ public class OrderController extends BaseController {
             throw new BusinessException(EmBusinessError.USER_NOT_LOGIN);
         }
     }
+
     @RequestMapping(
             value = {"/list_status"},
             method = {RequestMethod.GET}
@@ -162,13 +163,11 @@ public class OrderController extends BaseController {
         if (isLogin != null && isLogin) {
             UserModel userModel = (UserModel)this.httpServletRequest.getSession().getAttribute("LOGIN_USER");
             Integer count = this.orderService.getCount(userModel.getId());
-            System.out.println(count);
             return CommonReturnType.create(count);
         } else {
             throw new BusinessException(EmBusinessError.USER_NOT_LOGIN);
         }
     }
-
     @RequestMapping(
             value = {"/getbyid"},
             method = {RequestMethod.GET}
@@ -178,7 +177,22 @@ public class OrderController extends BaseController {
         OrderVO orderVO = this.convertFromModel(orderModel);
         return CommonReturnType.create(orderVO);
     }
-
+    @RequestMapping(
+            value = {"/company"},
+            method = {RequestMethod.GET}
+    )
+    public CommonReturnType getCompany(@RequestParam(name = "id") String id) {
+        String company = this.orderService.getCompany(id);
+        return CommonReturnType.create(company);
+    }
+    @RequestMapping(
+            value = {"/number"},
+            method = {RequestMethod.GET}
+    )
+    public CommonReturnType getNumber(@RequestParam(name = "id") String id) {
+        String number = this.orderService.getNumber(id);
+        return CommonReturnType.create(number);
+    }
     @RequestMapping(
             value = {"/complete"},
             method = {RequestMethod.POST},

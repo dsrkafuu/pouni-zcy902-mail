@@ -28,6 +28,10 @@ public interface LogisticsDOMapper {
 
     String getOrderIdById(String id);
 
+    String getCompanyByOrderId(String orderId);
+
+    String getNumberByOrderId(String orderId);
+
     int updateByPrimaryKeySelective(LogisticsDO record);
 
     int updateByPrimaryKey(LogisticsDO record);

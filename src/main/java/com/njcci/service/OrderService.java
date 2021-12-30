@@ -42,5 +42,9 @@ public interface OrderService {
 
     List<LogisticsModel> getLogisticsListByDeliveryName(String storeName, Integer page, String deliveryName);
 
+    String getCompany(String id);
+
+    String getNumber(String id);
+
     Integer getCountByStoreName(String storeName);
 }

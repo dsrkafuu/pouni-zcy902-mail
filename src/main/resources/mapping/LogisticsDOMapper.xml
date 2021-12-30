@@ -74,6 +74,18 @@
     where store_name = #{storeName,jdbcType=VARCHAR} and delivery_company = #{deliveryName,jdbcType=VARCHAR}
     order by create_time DESC limit #{offset,jdbcType=INTEGER} , 3
   </select>
+  <select id="getCompanyByOrderId" parameterType="java.lang.String" resultType="java.lang.String">
+    select delivery_company
+    <include refid="Base_Column_List" />
+    from logistics_info
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <select id="getNumberByOrderId" parameterType="java.lang.String" resultType="java.lang.String">
+    select delivery_number
+    <include refid="Base_Column_List" />
+    from logistics_info
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     <!--
       WARNING - @mbg.generated

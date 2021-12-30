@@ -298,7 +298,14 @@ public class OrderServiceImpl implements OrderService {
         int result = this.logisticsDOMapper.getCountByStoreName(storeName);
         return result;
     }
-
+    public String getCompany(String id){
+        String result = this.logisticsDOMapper.getCompanyByOrderId(id);
+        return result;
+    }
+    public String getNumber(String id){
+        String result = this.logisticsDOMapper.getNumberByOrderId(id);
+        return result;
+    }
     public LogisticsModel completeLogistics(String id, String deliveryCompany, String deliveryNumber, String storeName) {
         LogisticsDO logisticsDO = this.logisticsDOMapper.selectByPrimaryKey(id);
         String orderId = this.logisticsDOMapper.getOrderIdById(id);
