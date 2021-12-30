@@ -336,7 +336,9 @@ $(function () {
       console.log(order_list.length);
       for (var i = 0; i < order_list.length; i++) {
         var orderVO = order_list[i];
+        console.log(orderVO)
         var itemVO = getItem(orderVO.itemId);
+        $('#send_list_' + i).hide();
         $('#order_' + i).show();
         $('#time_' + i).html(
           new Date(orderVO.createTime).format('yyyy-MM-dd hh:mm:ss')
@@ -397,16 +399,72 @@ $(function () {
           $('#cancel_btn_' + i).hide();
           $('#get_logistics_' + i).hide();
         } else {
-          $('#logistics_status_' + i).html('运输中');
-          $('#get_logistics_' + i).show();
-          $('#pay_btn_' + i).hide();
-          $('#cancel_btn_' + i).hide();
-          $('#send_msg_' + i).hide();
+          let ii = i;
+          $('#logistics_status_' + ii).html('运输中');
+          $('#get_logistics_' + ii).show();
+          $('#pay_btn_' + ii).hide();
+          $('#cancel_btn_' + ii).hide();
+          $('#send_msg_' + ii).hide();
+          $('#get_logistics_' + ii).on('click', function(){
+            $(this).hide();
+            var id = order_list[ii].id;
+            var company = getCompany(id);
+            var number = getNum(id);
+            $('#send_list_' + ii).show();
+            $('#company_' + ii).val(company);
+            $('#number_' + ii).val(number);
+            $('#sub_info_' + ii).hide();
+          });
         }
       }
     }
   }
-
+  function getCompany(id){
+    var company = "aaaa";
+    $.ajax({
+      type: 'GET',
+      url: '/order/company',
+      data: {
+        id: id,
+      },
+      async: false,
+      xhrFields: { withCredentials: true },
+      success(data) {
+        if (data.status == 'success') {
+          company = data.data;
+        } else {
+          alert('获取商品息失败，原因是' + data.data.errMsg);
+        }
+      },
+      error(data) {
+        alert('获取商品息失败，原因是' + data.responseText);
+      },
+    });
+    return company;
+  }
+  function getNum(id){
+    var number = "aaaa";
+    $.ajax({
+      type: 'GET',
+      url: '/order/number',
+      data: {
+        id: id,
+      },
+      async: false,
+      xhrFields: { withCredentials: true },
+      success(data) {
+        if (data.status == 'success') {
+          number = data.data;
+        } else {
+          alert('获取商品息失败，原因是' + data.data.errMsg);
+        }
+      },
+      error(data) {
+        alert('获取商品息失败，原因是' + data.responseText);
+      },
+    });
+    return number;
+  }
   function getItem(id) {
     var itemVO = [];
     $.ajax({
