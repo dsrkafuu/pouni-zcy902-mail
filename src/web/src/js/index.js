@@ -2,15 +2,22 @@ import $ from 'jquery';
 
 //定义全局商品数组信息
 
-const list_title = ['经典典藏', '书画图书', '文具', '家庭生活', '服饰', '电子产品'];
-$(function (){
+const list_title = [
+  '经典典藏',
+  '书画图书',
+  '文具',
+  '家庭生活',
+  '服饰',
+  '电子产品',
+];
+$(function () {
   getData(1);
   reloadButton();
 });
 
 function reloadItem(floor, list_data) {
   var num = list_data.length;
-  for (var i = 0; i < 4 && i < num; i++) {
+  for (var i = 0; i < 5 && i < num; i++) {
     var itemVO = list_data[i];
     $('#goods_title_f' + floor + '_' + i)
       .parent()
@@ -24,7 +31,7 @@ function reloadItem(floor, list_data) {
       .parent('a')
       .attr('href', 'detail.html?id=' + itemVO.id);
     $('#goods_price_f' + floor + '_' + i).text('￥ ' + itemVO.price.toFixed(2));
-    $('#itemDetail' + itemVO.id). on('click', function () {
+    $('#itemDetail' + itemVO.id).on('click', function () {
       window.location.href = '/detail.html?id=' + $(this).data('id');
     });
   }
@@ -71,7 +78,7 @@ function reloadButton() {
     $('#get_more_' + i).attr({
       'data-id': i,
     });
-    $('#get_more_' + i). on('click', function () {
+    $('#get_more_' + i).on('click', function () {
       window.location.href = '/list.html?sort=' + $(this).data('id');
     });
   }

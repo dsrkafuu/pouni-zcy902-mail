@@ -352,29 +352,24 @@ body {
 .goods_con {
   height: 300px;
 }
-.goods_banner {
-  width: 200px;
-  height: 300px;
-}
-.goods_banner img {
-  width: 200px;
-  height: 300px;
-}
 
 .goods_list {
-  width: 1000px;
-  height: 299px;
-  border-bottom: 1px solid #ededed;
+  box-sizing: border-box;
+  width: 1200px;
+  height: 300px;
+}
+.goods_list * {
+  box-sizing: border-box;
 }
 .goods_list li {
-  height: 299px;
-  width: 249px;
-  border-right: 1px solid #ededed;
+  height: 300px;
+  width: 240px;
+  border: 1px solid #ededed;
   float: left;
 }
 .goods_list li:hover {
-  width: 248px;
-  height: 297px;
+  width: 240px;
+  height: 300px;
   border: 1px solid gold;
 }
 .goods_list li:hover img {
