@@ -398,7 +398,7 @@ $(function () {
           $('#pay_btn_' + i).hide();
           $('#cancel_btn_' + i).hide();
           $('#get_logistics_' + i).hide();
-        } else {
+        } else if(orderVO.status == 4){
           let ii = i;
           $('#logistics_status_' + ii).html('运输中');
           $('#get_logistics_' + ii).show();
@@ -413,8 +413,38 @@ $(function () {
             $('#send_list_' + ii).show();
             $('#company_' + ii).val(company);
             $('#number_' + ii).val(number);
-            $('#sub_info_' + ii).hide();
           });
+          $('#sub_info_' + ii).on('click', function (){
+            $(this).hide();
+            var id = order_list[ii].id;
+            $.ajax({
+              type: 'POST',
+              contentType: 'application/x-www-form-urlencoded',
+              url: '/order/confirm',
+              data: {
+                id: id,
+              },
+              xhrFields: { withCredentials: true },
+              success(data) {
+                if (data.status == 'success') {
+                  window.location.reload();
+                } else {
+                  alert('确认订单失败，原因是' + data.data.errMsg);
+                }
+              },
+              error(data) {
+                alert('确认订单失败，原因是' + data.responseText);
+              },
+            });
+          });
+        } else if(orderVO.status == 5) {
+          let ii = i;
+          $('#logistics_status_' + ii).html('已收货');
+          $('#sub_info_' + ii).hide();
+          $('#pay_btn_' + ii).hide();
+          $('#cancel_btn_' +ii).hide();
+          $('#send_msg_' + ii).hide();
+          $('#get_logistics_' + ii).hide();
         }
       }
     }

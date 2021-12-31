@@ -30,6 +30,8 @@ public interface OrderService {
 
     void cancelOrder(String id, Integer userId);
 
+    void confirmOrder(String id, Integer userId);
+
     LogisticsModel completeLogistics(String id, String deliveryCompany, String deliveryNumber, String storeName);
 
     List<LogisticsModel> getLogistics(String storeName, Integer page);

@@ -34,4 +34,6 @@ public interface OrderDOMapper {
 
     void changeStatus(String id);
 
+    void confirmOrder(String id);
+
 }

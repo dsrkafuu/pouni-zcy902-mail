@@ -225,6 +225,22 @@ public class OrderController extends BaseController {
         }
     }
 
+    @RequestMapping(
+            value = {"/confirm"},
+            method = {RequestMethod.POST},
+            consumes = {"application/x-www-form-urlencoded"}
+    )
+    public CommonReturnType confirmOrder(@RequestParam(name = "id") String id) {
+        Boolean isLogin = (Boolean)this.httpServletRequest.getSession().getAttribute("IS_USER_LOGIN");
+        if (isLogin != null && isLogin) {
+            UserModel userModel = (UserModel)this.httpServletRequest.getSession().getAttribute("LOGIN_USER");
+            this.orderService.confirmOrder(id, userModel.getId());
+            return CommonReturnType.create((Object)null);
+        } else {
+            throw new BusinessException(EmBusinessError.USER_NOT_LOGIN);
+        }
+    }
+
     private OrderVO convertFromModel(OrderModel orderModel) {
         if (orderModel == null) {
             return null;

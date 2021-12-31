@@ -223,4 +223,9 @@
     set status = 4
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <update id="confirmOrder" parameterType="java.lang.String">
+    update order_info
+    set status = 5
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
 </mapper>

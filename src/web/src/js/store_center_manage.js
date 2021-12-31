@@ -387,7 +387,15 @@ $(function () {
             $('#number_' + ii).val(number);
             $('#sub_info_' + ii).hide();
           });
-         }
+         } else if(orderVO.status === 5){
+          let ii = i;
+          $('#status_' + ii).html('已收货');
+          $('#sub_info_' + ii).hide();
+          $('#pay_btn_' + ii).hide();
+          $('#cancel_btn_' +ii).hide();
+          $('#send_msg_' + ii).hide();
+          $('#get_logistics_' + ii).hide();
+        }
       }
     }
   }

@@ -230,6 +230,19 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Transactional
+    public void confirmOrder(String id, Integer userId) {
+        OrderDO orderDO = this.orderDOMapper.selectByPrimaryKey(id);
+        if (orderDO == null) {
+            throw new BusinessException(EmBusinessError.ORDER_NOT_EXIST);
+        } else if (orderDO.getUserId() != userId) {
+            throw new BusinessException(EmBusinessError.USER_NOT_LOGIN, "登录信息异常");
+        } else if (orderDO.getStatus() != 4) {
+            throw new BusinessException(EmBusinessError.ORDER_STATUS_ERROR);
+        } else {
+            this.orderDOMapper.confirmOrder(id);
+        }
+    }
     public List<LogisticsModel> getLogistics(String storeName, Integer page) {
         List<LogisticsDO> logisticsDOList = this.logisticsDOMapper.listByStoreName(storeName, (page - 1) * 3);
         if (logisticsDOList == null) {
