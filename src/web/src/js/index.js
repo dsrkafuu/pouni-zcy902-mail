@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 //定义全局商品数组信息
 
-const list_title = ['卧室', '餐厅', '客厅', '书房', '墙纸', '家装风格'];
+const list_title = ['经典典藏', '书画图书', '文具', '家庭生活', '服饰', '电子产品'];
 $(function (){
   getData(1);
   reloadButton();
