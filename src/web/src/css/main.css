@@ -262,6 +262,9 @@ body {
   left: 0;
   top: 0;
 }
+.slide .slide_pics img {
+  height: 270px;
+}
 .slide .prev,
 .slide .next {
   width: 17px;
